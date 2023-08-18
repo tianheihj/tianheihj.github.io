@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tianhei.top","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本篇文章就来介绍下anaconda的安装和使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Anaconda">
+<meta property="og:url" content="http://tianhei.top/2023/08/03/anaconda/01.anaconda%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="天海工作室">
+<meta property="og:description" content="本篇文章就来介绍下anaconda的安装和使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657758.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657815.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657858.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657900.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657941.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657979.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170658077.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI5MTIwMzk%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/20190929142336844.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/20190929151418382.png">
+<meta property="article:published_time" content="2023-08-03T06:52:13.000Z">
+<meta property="article:modified_time" content="2023-08-07T08:42:42.928Z">
+<meta property="article:author" content="天海">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng.png">
+
+
+<link rel="canonical" href="http://tianhei.top/2023/08/03/anaconda/01.anaconda%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://tianhei.top/2023/08/03/anaconda/01.anaconda%E5%9F%BA%E7%A1%80/","path":"2023/08/03/anaconda/01.anaconda基础/","title":"Anaconda"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Anaconda | 天海工作室</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">天海工作室</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81Anaconda%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">一、Anaconda是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Anaconda%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">二、Anaconda安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%AE%89%E8%A3%85%E5%87%86%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">3.1. 安装准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.2.</span> <span class="nav-text">3.2. 安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E5%9C%A8Windows%E7%B3%BB%E7%BB%9F%E4%B8%8B%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.1.</span> <span class="nav-text">3.2.1. 在Windows系统下安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E5%9C%A8macOS%E7%B3%BB%E7%BB%9F%E4%B8%8B%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.2.</span> <span class="nav-text">3.2.2. 在macOS系统下安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E5%9C%A8Linux%E7%B3%BB%E7%BB%9F%E4%B8%8B%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.3.</span> <span class="nav-text">3.2.3 在Linux系统下安装</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Anaconda%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">四、Anaconda配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Windows-%E4%B8%8B%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">4.1 Windows 下环境变量配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81Anaconda%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">五、Anaconda使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E7%AE%A1%E7%90%86%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">4.1.</span> <span class="nav-text">5.1. 管理虚拟环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1-%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">4.1.1.</span> <span class="nav-text">5.1.1. 创建新的虚拟环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-2-%E8%BF%9B%E5%85%A5%E6%88%96%E5%88%87%E6%8D%A2%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">4.1.2.</span> <span class="nav-text">5.1.2. 进入或切换虚拟环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-3-%E9%80%80%E5%87%BA%E5%BD%93%E5%89%8D%E7%8E%AF%E5%A2%83"><span class="nav-number">4.1.3.</span> <span class="nav-text">5.1.3. 退出当前环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-4-%E6%9F%A5%E7%9C%8B%E5%B7%B2%E5%88%9B%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">4.1.4.</span> <span class="nav-text">5.1.4. 查看已创建环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-5-%E5%A4%8D%E5%88%B6%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">4.1.5.</span> <span class="nav-text">5.1.5. 复制虚拟环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-6-%E5%88%A0%E9%99%A4%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">4.1.6.</span> <span class="nav-text">5.1.6. 删除虚拟环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7%E5%8C%85"><span class="nav-number">4.2.</span> <span class="nav-text">5.2. 管理软件工具包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-1-%E6%9F%A5%E6%89%BE%E5%8F%AF%E4%BE%9B%E5%AE%89%E8%A3%85%E7%9A%84%E5%8C%85%E7%89%88%E6%9C%AC"><span class="nav-number">4.2.1.</span> <span class="nav-text">5.2.1. 查找可供安装的包版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-2-%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%8C%85%E5%AE%89%E8%A3%85%E4%BF%A1%E6%81%AF"><span class="nav-number">4.2.2.</span> <span class="nav-text">5.2.2. 获取当前环境中包安装信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-3-%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-number">4.2.3.</span> <span class="nav-text">5.2.3. 安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-4-%E6%9B%B4%E6%96%B0%E5%8C%85"><span class="nav-number">4.2.4.</span> <span class="nav-text">5.2.4. 更新包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-5-%E5%8D%B8%E8%BD%BD%E5%8C%85"><span class="nav-number">4.2.5.</span> <span class="nav-text">5.2.5. 卸载包</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Anaconda%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">三、Anaconda使用教程</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="天海"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">天海</p>
+  <div class="site-description" itemprop="description">路漫漫其修远兮，吾将上下而求索！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tianheihj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tianheihj" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianheiwy@163.com" title="E-Mail → mailto:tianheiwy@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.iissnan.com/" title="https:&#x2F;&#x2F;theme-next.iissnan.com&#x2F;" rel="noopener" target="_blank">next主题配置</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tianhei.top/2023/08/03/anaconda/01.anaconda%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="天海">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天海工作室">
+      <meta itemprop="description" content="路漫漫其修远兮，吾将上下而求索！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Anaconda | 天海工作室">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Anaconda
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-03 14:52:13" itemprop="dateCreated datePublished" datetime="2023-08-03T14:52:13+08:00">2023-08-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-08-07 16:42:42" itemprop="dateModified" datetime="2023-08-07T16:42:42+08:00">2023-08-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Anaconda/" itemprop="url" rel="index"><span itemprop="name">Anaconda</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本篇文章就来介绍下anaconda的安装和使用</p>
+<span id="more"></span>
+
+<h1 id="一、Anaconda是什么？"><a href="#一、Anaconda是什么？" class="headerlink" title="一、Anaconda是什么？"></a>一、Anaconda是什么？</h1><p>就是可以便捷获取包且对包能够进行管理，同时对环境可以统一管理的发行版本。Anaconda包含了conda、Python在内的超过180个科学包及其依赖项。即它可以在你的电脑上创建多个你想要的python环境，并为每个python环境安装不同的包，不同环境相互切换，操作简单，使用方便！</p>
+<h1 id="二、Anaconda安装"><a href="#二、Anaconda安装" class="headerlink" title="二、Anaconda安装"></a>二、Anaconda安装</h1><h2 id="3-1-安装准备"><a href="#3-1-安装准备" class="headerlink" title="3.1. 安装准备"></a>3.1. 安装准备</h2><ul>
+<li>安装平台：Anaconda可以在Windows、macOS、Linux(X86&#x2F;Power8)中安装；</li>
+<li>安装条件：32位或64位系统均可，所需空间大小约为3GB(Miniconda仅需400MB空间)；</li>
+<li>软件下载：Anaconda历史版本下载地址：<a target="_blank" rel="noopener" href="https://repo.continuum.io/archive/%EF%BC%9B">https://repo.continuum.io/archive/；</a></li>
+</ul>
+<p>​		清华大学开源镜像站：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/</a></p>
+<h2 id="3-2-安装步骤"><a href="#3-2-安装步骤" class="headerlink" title="3.2. 安装步骤"></a>3.2. 安装步骤</h2><h3 id="3-2-1-在Windows系统下安装"><a href="#3-2-1-在Windows系统下安装" class="headerlink" title="3.2.1. 在Windows系统下安装"></a>3.2.1. 在Windows系统下安装</h3><p><strong>第一步：</strong>完成下载之后，双击下载文件，启动安装程序。</p>
+<p>注意：如果在安装过程中遇到任何问题，那么暂时地关闭杀毒软件，并在安装程序完成之后再打开。如果在安装时选择了“为所有用户安装”，则卸载Anaconda然后重新安装，只为“我这个用户”安装。</p>
+<p><strong>第二步：</strong>选择“Next”。</p>
+<p><strong>第三步：</strong>阅读许可证协议条款，然后勾选“I Agree”并进行下一步。</p>
+<p><strong>第四步：</strong>除非是以管理员身份为所有用户安装，否则仅勾选“Just Me”并点击“Next”。</p>
+<p><strong>第五步：</strong>在“Choose Install Location”界面中选择安装Anaconda的目标路径，然后点击“Next”。</p>
+<p>注意：目标路径中<strong>不能</strong>含有<strong>空格</strong>，同时不能是“unicode”编码。除非被要求以管理员权限安装，否则不要以管理员身份安装。</p>
+<p>​                   <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng.png" alt="img"></p>
+<p><strong>第六步:<strong>在“Advanced Installation Options”中</strong>不要</strong>勾选“Add Anaconda to my PATH environment variable.”（“添加Anaconda至我的环境变量。”）。因为如果勾选，则将会影响其他程序的使用。如果使用Anaconda，则通过打开Anaconda Navigator或者在开始菜单中的“Anaconda Prompt”（类似macOS中的“终端”）中进行使用。</p>
+<p>除非你打算使用多个版本的Anaconda或者多个版本的Python，否则便勾选“Register Anaconda as my default Python 3.6”。</p>
+<p>然后点击“Install”开始安装。如果想要查看安装细节，则可以点击“Show Details”。</p>
+<p>​                   <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657758.png" alt="img"></p>
+<p><strong>第七步：</strong>点击“Next”。</p>
+<p><strong>第八步：</strong>进入“Thanks for installing Anaconda!”界面则意味着安装成功，点击“Finish”完成安装。</p>
+<p>注意：如果你不想了解“Anaconda云”和“Anaconda支持”，则可以<strong>不勾选</strong>“Learn more about Anaconda Cloud”和“Learn more about Anaconda Support”。</p>
+<p>​                   <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657815.png" alt="img"></p>
+<p><strong>第九步：</strong>验证安装结果。可选以下任意方法：</p>
+<ol>
+<li>“开始 → Anaconda3（64-bit）→ Anaconda Navigator”，若可以成功启动Anaconda Navigator则说明安装成功。</li>
+<li>“开始 → Anaconda3（64-bit）→ 右键点击Anaconda Prompt → 以管理员身份运行”，在Anaconda Prompt中输入<code>conda list</code>，可以查看已经安装的包名和版本号。若结果可以正常显示，则说明安装成功。</li>
+</ol>
+<h3 id="3-2-2-在macOS系统下安装"><a href="#3-2-2-在macOS系统下安装" class="headerlink" title="3.2.2. 在macOS系统下安装"></a>3.2.2. 在macOS系统下安装</h3><p><strong>第一步：</strong>双击下载文件，在对话框中“Introduction”、“Read Me”、“License”部分可直接点击下一步。</p>
+<p><strong>第二步：</strong>“Destination Select”部分选择“Install for me only”并点击下一步。</p>
+<p>注意：若有错误提示信息“You cannot install Anaconda in this location”则重新选择“Install for me only”并点击下一步。</p>
+<p>​                   <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657858.png" alt="img"></p>
+<p><strong>第三步：</strong>“Installation Type”部分，可以点击“Change Install Location”来改变安装位置。标准的安装路径是在用户的家目录下。在这一步我没有改变安装位置。若选择默认安装路径，则直接点击“Install”进行安装。</p>
+<p>​                   <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657900.png" alt="img"></p>
+<p><strong>第四步：</strong>等待“Installation”部分结束，在“Summary”部分若看到“The installation was completed successfully.”则安装成功，直接点击“Close”关闭对话框。</p>
+<p>​                   <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657941.png" alt="img"></p>
+<p><strong>第五步：</strong>在mac的Launchpad中可以找到名为“Anaconda-Navigator”的图标，点击打开。</p>
+<p>​                                     <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170657979.png" alt="img"></p>
+<p><strong>第六步：</strong>若“Anaconda-Navigator”成功启动，则说明真正成功地安装了Anaconda；如果未成功，请务必仔细检查以上安装步骤。</p>
+<ul>
+<li><p>“Anaconda-Navigator”中已经包含“Jupyter Notebook”、“Jupyterlab”、“Qtconsole”和“Spyder”。（图中的“Rstudio”是我后来安装的，但它默认出现在“Anaconda-Navigator”的启动界面，只需要点击“Install”便可安装。）</p>
+<p>​           <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/format%2Cpng-20230729170658077.png" alt="img"></p>
+</li>
+</ul>
+<p><strong>第七步：</strong>完成安装</p>
+<h3 id="3-2-3-在Linux系统下安装"><a href="#3-2-3-在Linux系统下安装" class="headerlink" title="3.2.3 在Linux系统下安装"></a>3.2.3 在Linux系统下安装</h3><p><strong>第一步：</strong>启动终端，在终端中输入命令<code>md5sum /path/filename</code>或<code>sha256sum /path/filename</code></p>
+<p>注意：将该步骤命令中的<code>/path/filename</code>替换为文件的实际下载路径和文件名。其中，path是路径，filename为文件名。</p>
+<p>强烈建议：</p>
+<p>​    路径和文件名中不要出现空格或其他特殊字符。</p>
+<p>​    路径和文件名最好以英文命名，不要以中文或其他特殊字符命名。</p>
+<p><strong>第二步：</strong>根据Python版本的不同有选择性地在终端输入命令：</p>
+<p>Python 3.6：<code>bash ~/Downloads/Anaconda3-5.0.1-Linux-x86_64.sh</code></p>
+<p>Python 2.7：<code>bash ~/Downloads/Anaconda2-5.0.1-Linux-x86_64.sh</code></p>
+<p>注意：(1). 首词bash也需要输入，无论是否用的Bash shell。</p>
+<p>​      (2). 如果你的下载路径是自定义的，那么把该步骤路径中的<code>~/Downloads</code>替换成你自己的下载路径。</p>
+<p>​      (3). 除非被要求使用root权限，否则均选择“Install Anaconda as a user”。</p>
+<p><strong>第三步：</strong>安装过程中，看到提示“In order to continue the installation process, please review the license agreement.”（“请浏览许可证协议以便继续安装。”），点击“Enter”查看“许可证协议”。</p>
+<p><strong>第四步：</strong>在“许可证协议”界面将屏幕滚动至底，输入“yes”表示同意许可证协议内容。然后进行下一步。</p>
+<p><strong>第五步：</strong>安装过程中，提示“Press Enter to accept the default install location, CTRL-C to cancel the installation or specify an alternate installation directory.”（“按回车键确认安装路径，按’CTRL-C’取消安装或者指定安装目录。”）如果接受默认安装路径，则会显示“PREFIX&#x3D;&#x2F;home&#x2F;<user>&#x2F;anaconda&lt;2 or 3&gt;”并且继续安装。安装过程大约需要几分钟的时间。</p>
+<p>建议：直接接受默认安装路径。</p>
+<p><strong>第六步：</strong>安装器若提示“Do you wish the installer to prepend the Anaconda&lt;2 or 3&gt; install location to PATH in your &#x2F;home&#x2F;<user>&#x2F;.bashrc ?”（“你希望安装器添加Anaconda安装路径在<code>/home/&lt;user&gt;/.bashrc</code>文件中吗？”），建议输入“yes”。</p>
+<p>注意：(1). 路径<code>/home/&lt;user&gt;/.bash_rc</code>中“<user>”即进入到家目录后你的目录名。</p>
+<p>​      (2). 如果输入“no”，则需要手动添加路径，否则conda将无法正常运行。</p>
+<p><strong>第七步：</strong>当看到“Thank you for installing Anaconda&lt;2 or 3&gt;!”则说明已经成功完成安装。</p>
+<p><strong>第八步：</strong>关闭终端，然后再打开终端以使安装后的Anaconda启动。或者直接在终端中输入<code>source ~/.bashrc</code>也可完成启动。</p>
+<p><strong>第九步：</strong>验证安装结果。可选用以下任意一种方法：</p>
+<p>(1). 在终端中输入命令<code>condal list</code>，如果Anaconda被成功安装，则会显示已经安装的包名和版本号。</p>
+<p>(2). 在终端中输入<code>python</code>。这条命令将会启动Python交互界面，如果Anaconda被成功安装并且可以运行，则将会在Python版本号的右边显示“Anaconda custom (64-bit)”。退出Python交互界面则输入<code>exit()</code>或<code>quit()</code>即可。</p>
+<p>(3). 在终端中输入<code>anaconda-navigator</code>。如果Anaconda被成功安装，则Anaconda Navigator将会被启动。</p>
+<h1 id="四、Anaconda配置"><a href="#四、Anaconda配置" class="headerlink" title="四、Anaconda配置"></a>四、Anaconda配置</h1><h2 id="4-1-Windows-下环境变量配置"><a href="#4-1-Windows-下环境变量配置" class="headerlink" title="4.1 Windows 下环境变量配置"></a>4.1 Windows 下环境变量配置</h2><p><strong>配置：</strong>如果是windows的话需要去 ****控制面板\系统和安全\系统\高级系统设置\环境变量\用户变量\PATH****中添加 anaconda的安装目录的Scripts文件夹, 比如我的路径是<code>***\*D:\DevelopmentSoftwareTools\Anaconda\Install\Scripts\****</code>, 看个人安装路径不同需要自己调整.</p>
+<p>​                 <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/watermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTI5MTIwMzk%3D%2Csize_16%2Ccolor_FFFFFF%2Ct_70.png" alt="img"></p>
+<p><strong>验证环境变量是否配置成功：</strong></p>
+<p>(1). 开始菜单或“win + R”，输入cmd 回车 打开终端</p>
+<p>(2). 输入 <code>conda --version或conda -V</code></p>
+<p>(3). 输出<code>conda 4.4.11</code>之类的就说明环境变量设置成功了.</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/20190929142336844.png" alt="img"></p>
+<p>\Anaconda\ </p>
+<p>\Anaconda\Scripts </p>
+<p>\Anaconda\Library\bin </p>
+<p>\Anaconda\Library\mingw-w64\bin（可选）</p>
+<h1 id="五、Anaconda使用"><a href="#五、Anaconda使用" class="headerlink" title="五、Anaconda使用"></a>五、Anaconda使用</h1><p>Anaconda管理环境和管理包我们主要以命令模式来说明，所以Windows用户请打开“Anaconda Prompt”或者可以输入命令的shell；macOS和Linux用户请打开“Terminal”（“终端”）进行操作。</p>
+<h2 id="5-1-管理虚拟环境"><a href="#5-1-管理虚拟环境" class="headerlink" title="5.1. 管理虚拟环境"></a>5.1. 管理虚拟环境</h2><p>conda 可以为你不同的项目建立不同的运行环境。</p>
+<h3 id="5-1-1-创建新的虚拟环境"><a href="#5-1-1-创建新的虚拟环境" class="headerlink" title="5.1.1. 创建新的虚拟环境"></a>5.1.1. 创建新的虚拟环境</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th><code>conda create --name &lt;env_name&gt; &lt;package_names&gt;</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><env_name></td>
+<td>即创建的环境名称。建议以英文命名，且不加空格，名称两边不加尖括号“&lt;&gt;”。</td>
+</tr>
+<tr>
+<td><package_names></td>
+<td>即安装在环境中的包名。名称两边不加尖括号“&lt;&gt;”。</td>
+</tr>
+<tr>
+<td>实例</td>
+<td><code>conda create -n python36 python=3.6 numpy pandas</code></td>
+</tr>
+<tr>
+<td>命令作用</td>
+<td>上面的实例命令中，是创建名为python36的环境，并且指定了python版本为3.6，同时安装了numpy、pandas包</td>
+</tr>
+<tr>
+<td>创建目录</td>
+<td>默认情况下，新创建的环境将会被保存在<code>/Users/&lt;user_name&gt;/anaconda3/env</code>目录下，其中，<code>&lt;user_name&gt;</code>为当前用户的用户名。</td>
+</tr>
+<tr>
+<td>指定python版本</td>
+<td>如果要安装指定的版本号，则只需要在包名后面以<code>=</code>和版本号的形式执行，如 python&#x3D;3.6</td>
+</tr>
+<tr>
+<td>同时安装多个包</td>
+<td>直接在<code>&lt;package_names&gt;</code>后以<strong>空格</strong>隔开，添加多个包名即可，如numpy pandas</td>
+</tr>
+</tbody></table>
+<h3 id="5-1-2-进入或切换虚拟环境"><a href="#5-1-2-进入或切换虚拟环境" class="headerlink" title="5.1.2. 进入或切换虚拟环境"></a>5.1.2. 进入或切换虚拟环境</h3><table>
+<thead>
+<tr>
+<th>Linux、macOS命令</th>
+<th><code>source activate &lt;env_name&gt;</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Windows命令</td>
+<td><code>activate &lt;env_name&gt;</code></td>
+</tr>
+<tr>
+<td><env_name></td>
+<td>需要进入或者要切换的目标环境名</td>
+</tr>
+<tr>
+<td>实例</td>
+<td><code>activate python36</code></td>
+</tr>
+<tr>
+<td>命令作用</td>
+<td>进入或者切换到名为python36的环境下</td>
+</tr>
+<tr>
+<td>如果不指定名</td>
+<td>如果创建环境后安装Python时没有指定Python的版本，那么将会安装与Anaconda版本相同的Python版本，即如果安装Anaconda第2版，则会自动安装Python 2.x；如果安装Anaconda第3版，则会自动安装Python 3.x。</td>
+</tr>
+</tbody></table>
+<h3 id="5-1-3-退出当前环境"><a href="#5-1-3-退出当前环境" class="headerlink" title="5.1.3. 退出当前环境"></a>5.1.3. 退出当前环境</h3><table>
+<thead>
+<tr>
+<th>Linux、macOS命令</th>
+<th><code>source deactivate</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Windows命令</td>
+<td><code>deactivate</code></td>
+</tr>
+<tr>
+<td>提示</td>
+<td>当执行退出当前环境，回到root环境命令后，原本行首以“(env_name)”或“[env_name]”开头的字符将不再显示。</td>
+</tr>
+</tbody></table>
+<h3 id="5-1-4-查看已创建环境"><a href="#5-1-4-查看已创建环境" class="headerlink" title="5.1.4. 查看已创建环境"></a>5.1.4. 查看已创建环境</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th><code>conda info --envs 或conda info -e 或conda env list</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>实例</td>
+<td><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/20190929151418382.png" alt="img"></td>
+</tr>
+<tr>
+<td>提示</td>
+<td>结果中星号“*”所在行即为当前所在环境。macOS系统中默认创建的环境名为“base”。</td>
+</tr>
+</tbody></table>
+<h3 id="5-1-5-复制虚拟环境"><a href="#5-1-5-复制虚拟环境" class="headerlink" title="5.1.5. 复制虚拟环境"></a>5.1.5. 复制虚拟环境</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th><code>conda create --name &lt;new_env_name&gt; --clone &lt;copied_env_name&gt;</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><new_env_name></td>
+<td>即为被复制&#x2F;克隆环境名。环境名两边不加尖括号“&lt;&gt;”</td>
+</tr>
+<tr>
+<td><copied_env_name></td>
+<td>即为复制之后新环境的名称。环境名两边不加尖括号“&lt;&gt;”</td>
+</tr>
+<tr>
+<td>实例</td>
+<td><code>conda create --name python36_new --clone python36</code></td>
+</tr>
+<tr>
+<td>命令作用</td>
+<td>即为克隆名为“python36”的环境，克隆后的新环境名为“python36_new”。此时，环境中将同时存在“python36”和“python36_new”环境，且两个环境的配置相同。</td>
+</tr>
+</tbody></table>
+<h3 id="5-1-6-删除虚拟环境"><a href="#5-1-6-删除虚拟环境" class="headerlink" title="5.1.6. 删除虚拟环境"></a>5.1.6. 删除虚拟环境</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th><code>conda remove --name &lt;env_name&gt; --all</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><env_name></td>
+<td>需要删除的环境名字</td>
+</tr>
+</tbody></table>
+<h2 id="5-2-管理软件工具包"><a href="#5-2-管理软件工具包" class="headerlink" title="5.2. 管理软件工具包"></a>5.2. 管理软件工具包</h2><h3 id="5-2-1-查找可供安装的包版本"><a href="#5-2-1-查找可供安装的包版本" class="headerlink" title="5.2.1. 查找可供安装的包版本"></a>5.2.1. 查找可供安装的包版本</h3><table>
+<thead>
+<tr>
+<th>精确查找命令</th>
+<th><code>conda search --full-name &lt;package_full_name&gt;</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–full-name</td>
+<td>为精确查找的参数</td>
+</tr>
+<tr>
+<td><package_full_name></td>
+<td>是被查找包的<strong>全名</strong>。包名两边不加尖括号“&lt;&gt;”</td>
+</tr>
+<tr>
+<td>实例</td>
+<td><code>conda search --full-name python</code></td>
+</tr>
+<tr>
+<td>实例命令作用</td>
+<td>查找全名为“python”的包有哪些版本可供安装</td>
+</tr>
+<tr>
+<td>模糊查找命令</td>
+<td><code>conda search &lt;text&gt;</code></td>
+</tr>
+<tr>
+<td><text></td>
+<td>是查找含有<strong>此字段</strong>的包名。此字段两边不加尖括号“&lt;&gt;”</td>
+</tr>
+</tbody></table>
+<h3 id="5-2-2-获取当前环境中包安装信息"><a href="#5-2-2-获取当前环境中包安装信息" class="headerlink" title="5.2.2. 获取当前环境中包安装信息"></a>5.2.2. 获取当前环境中包安装信息</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th><code>conda list</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>作用</td>
+<td>执行上述命令后将在终端显示当前环境已安装包的包名及其版本号。</td>
+</tr>
+</tbody></table>
+<h3 id="5-2-3-安装包"><a href="#5-2-3-安装包" class="headerlink" title="5.2.3. 安装包"></a>5.2.3. 安装包</h3><table>
+<thead>
+<tr>
+<th><em><strong>*1.在指定环境中安装包命令*</strong></em></th>
+<th><code>conda install --name &lt;env_name&gt; &lt;package_name&gt;</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><env_name></td>
+<td>即将包安装的指定环境名。环境名两边不加尖括号“&lt;&gt;”</td>
+</tr>
+<tr>
+<td><package_name></td>
+<td>即要安装的包名。包名两边不加尖括号“&lt;&gt;”</td>
+</tr>
+<tr>
+<td>实例</td>
+<td><code>conda install --name python36 pandas</code></td>
+</tr>
+<tr>
+<td>实例命令作用</td>
+<td>即在名为“python36”的环境中安装pandas包。</td>
+</tr>
+<tr>
+<td><em><strong>*2.在当前环境中安装包命令*</strong></em></td>
+<td><code>conda install &lt;package_name&gt;</code></td>
+</tr>
+<tr>
+<td><package_name></td>
+<td>即要安装的包名。包名两边不加尖括号“&lt;&gt;”</td>
+</tr>
+<tr>
+<td><em><strong>*3.使用pip安装包命令*</strong></em></td>
+<td><code>pip install &lt;package_name&gt;</code></td>
+</tr>
+<tr>
+<td><package_name></td>
+<td>为指定安装包的名称。包名两边不加尖括号“&lt;&gt;”</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>当使用<code>conda install</code>无法进行安装时，可以使用pip进行安装。例如：see包</td>
+</tr>
+<tr>
+<td>实例</td>
+<td><code>pip install see</code></td>
+</tr>
+<tr>
+<td>作用</td>
+<td>安装see包</td>
+</tr>
+<tr>
+<td>注意</td>
+<td>pip只是包管理器，无法对环境进行管理。因此如果想在指定环境中使用pip进行安装包，则需要先切换到指定环境中，再使用pip命令安装包。pip无法更新python，因为pip并不将python视为包。pip可以安装一些conda无法安装的包；conda也可以安装一些pip无法安装的包。因此当使用一种命令无法安装包时，可以尝试用另一种命令。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="5-2-4-更新包"><a href="#5-2-4-更新包" class="headerlink" title="5.2.4. 更新包"></a>5.2.4. 更新包</h3><table>
+<thead>
+<tr>
+<th>更新所有包命令</th>
+<th><code>conda update --all 或 conda upgrade --all</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>建议</td>
+<td>在安装Anaconda之后执行上述命令更新Anaconda中的所有包至最新版本，便于使用。</td>
+</tr>
+<tr>
+<td>更新指定包</td>
+<td><code>conda update &lt;package_name&gt; 或conda upgrade &lt;package_name&gt;</code></td>
+</tr>
+<tr>
+<td><package_name></td>
+<td>为指定更新的包名。包名两边不加尖括号“&lt;&gt;”</td>
+</tr>
+<tr>
+<td>实例</td>
+<td><code>conda update pandas numpy matplotlib</code></td>
+</tr>
+<tr>
+<td>作用</td>
+<td>更新多个指定包，则包名以<strong>空格</strong>隔开，向后排列；即更新pandas、numpy、matplotlib包</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="5-2-5-卸载包"><a href="#5-2-5-卸载包" class="headerlink" title="5.2.5. 卸载包"></a>5.2.5. 卸载包</h3><table>
+<thead>
+<tr>
+<th>卸载制定环境中的包命令</th>
+<th><code>conda remove --name &lt;env_name&gt; &lt;package_name&gt;</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><env_name></td>
+<td>即卸载包所在指定环境的名称。环境名两边不加尖括号“&lt;&gt;”</td>
+</tr>
+<tr>
+<td><package_name></td>
+<td>即要卸载包的名称。包名两边不加尖括号“&lt;&gt;”</td>
+</tr>
+<tr>
+<td>实例</td>
+<td><code>conda remove --name python36 pandas</code></td>
+</tr>
+<tr>
+<td>作用</td>
+<td>即卸载名为“python36”中的pandas包。</td>
+</tr>
+<tr>
+<td>卸载当前环境中的包</td>
+<td><code>conda remove &lt;package_name&gt;</code></td>
+</tr>
+<tr>
+<td><package_name></td>
+<td>即要卸载包的名称。包名两边不加尖括号“&lt;&gt;”</td>
+</tr>
+<tr>
+<td>实例</td>
+<td><code>conda remove pandas</code></td>
+</tr>
+<tr>
+<td>作用</td>
+<td>即在当前环境中卸载pandas包。</td>
+</tr>
+</tbody></table>
+<p>1.修改为清华源<br>直接打开cmd输入以下命令<br>conda config –add channels <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</a><br>conda config –add channels <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</a><br>conda config –add channels <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud//pytorch/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud//pytorch/</a><br>conda config –add channels <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</a><br>conda config –set show_channel_urls yes<br>2.移除清华源<br>输入：conda config –remove channels <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</a><br>这个命令是为了移除之前conda config –show channels显示的清华源。</p>
+<h1 id="三、Anaconda使用教程"><a href="#三、Anaconda使用教程" class="headerlink" title="三、Anaconda使用教程"></a>三、Anaconda使用教程</h1>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/mm_facetoface_collect_qrcode_1690448192277.png" alt="天海 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/1690448212406.jpg" alt="天海 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/27/hexo%E6%90%AD%E5%BB%BA/Failed%20to%20connect%20to%20raw.githubusercontent.com%20port%20443%20%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/" rel="prev" title="Failed to connect to raw.githubusercontent.com port 443 处理方法">
+                  <i class="fa fa-angle-left"></i> Failed to connect to raw.githubusercontent.com port 443 处理方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/08/04/python%E7%88%AC%E8%99%AB/04selenium/" rel="next" title="selenium">
+                  selenium <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">天海</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

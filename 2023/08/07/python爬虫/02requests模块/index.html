@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tianhei.top","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本阶段课程主要学习requests这个http模块，该模块主要用于发送请求获取响应，该模块有很多的替代模块，比如说urlib模块，但是在工作中用的最多的还是requests模块，requests的代码简洁易懂，相对于臃肿的urllib模块，使用requests编写的爬虫代码将会更少，而且实现某一功能将会简单。因此建议大家掌握该模块的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="requests模块">
+<meta property="og:url" content="http://tianhei.top/2023/08/07/python%E7%88%AC%E8%99%AB/02requests%E6%A8%A1%E5%9D%97/index.html">
+<meta property="og:site_name" content="天海工作室">
+<meta property="og:description" content="本阶段课程主要学习requests这个http模块，该模块主要用于发送请求获取响应，该模块有很多的替代模块，比如说urlib模块，但是在工作中用的最多的还是requests模块，requests的代码简洁易懂，相对于臃肿的urllib模块，使用requests编写的爬虫代码将会更少，而且实现某一功能将会简单。因此建议大家掌握该模块的使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807113135235.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807113157244.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807113210313.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807113220650.png">
+<meta property="article:published_time" content="2023-08-07T03:52:13.000Z">
+<meta property="article:modified_time" content="2023-08-07T07:52:45.549Z">
+<meta property="article:author" content="天海">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="爬虫　">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807113135235.png">
+
+
+<link rel="canonical" href="http://tianhei.top/2023/08/07/python%E7%88%AC%E8%99%AB/02requests%E6%A8%A1%E5%9D%97/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://tianhei.top/2023/08/07/python%E7%88%AC%E8%99%AB/02requests%E6%A8%A1%E5%9D%97/","path":"2023/08/07/python爬虫/02requests模块/","title":"requests模块"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>requests模块 | 天海工作室</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">天海工作室</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#requests%E6%A8%A1%E5%9D%97%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">requests模块介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#requests%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">requests模块的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">requests安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests%E6%A8%A1%E5%9D%97%E5%8F%91%E9%80%81get%E8%AF%B7%E6%B1%82"><span class="nav-number">1.3.</span> <span class="nav-text">requests模块发送get请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#response%E5%93%8D%E5%BA%94%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">response响应对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#requests%E6%A8%A1%E5%9D%97%E5%8F%91%E9%80%81get%E8%AF%B7%E6%B1%82-1"><span class="nav-number">3.</span> <span class="nav-text">requests模块发送get请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E5%B8%A6headers%E7%9A%84%E8%AF%B7%E6%B1%82"><span class="nav-number">3.1.</span> <span class="nav-text">发送带headers的请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E8%AF%B7%E6%B1%82"><span class="nav-number">3.2.</span> <span class="nav-text">发送带参数的请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8headers%E5%8F%82%E6%95%B0%E4%B8%AD%E6%90%BA%E5%B8%A6cookie"><span class="nav-number">3.3.</span> <span class="nav-text">在headers参数中携带cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookies%E5%8F%82%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.4.</span> <span class="nav-text">cookies参数的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookieJar%E5%AF%B9%E8%B1%A1%E8%BD%AC%E6%8D%A2%E4%B8%BAcookies%E5%AD%97%E5%85%B8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.5.</span> <span class="nav-text">cookieJar对象转换为cookies字典的方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#requests%E6%A8%A1%E5%9D%97%E5%8F%91%E9%80%81post%E8%AF%B7%E6%B1%82"><span class="nav-number">4.</span> <span class="nav-text">requests模块发送post请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#requests-%E5%8F%91%E9%80%81post%E8%AF%B7%E6%B1%82%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">requests.发送post请求的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POST%E5%8F%91%E9%80%81JSON%E6%95%B0%E6%8D%AE"><span class="nav-number">4.2.</span> <span class="nav-text">POST发送JSON数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POST-%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">** POST 上传文件**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-POST-%E8%AF%B7%E6%B1%82%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5"><span class="nav-number">4.4.</span> <span class="nav-text">使用 POST 请求抓取网页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post-%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90"><span class="nav-number">4.5.</span> <span class="nav-text">post 数据来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E7%99%BB%E5%BD%95%E7%9A%84post%E5%9C%B0%E5%9D%80"><span class="nav-number">4.6.</span> <span class="nav-text">寻找登录的post地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%BD%8D%E6%83%B3%E8%A6%81%E7%9A%84js"><span class="nav-number">4.7.</span> <span class="nav-text">定位想要的js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">高级用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E6%97%B6%E5%8F%82%E6%95%B0timeout%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">5.1.</span> <span class="nav-text">超时参数timeout的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E4%BB%A3%E7%90%86%E4%BB%A5%E5%8F%8Aproxy%E4%BB%A3%E7%90%86%E5%8F%82%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">5.2.</span> <span class="nav-text">了解代理以及proxy代理参数的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8verify%E5%8F%82%E6%95%B0%E5%BF%BD%E7%95%A5CA%E8%AF%81%E4%B9%A6"><span class="nav-number">5.3.</span> <span class="nav-text">使用verify参数忽略CA证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81"><span class="nav-number">5.4.</span> <span class="nav-text">身份认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8requests-session%E8%BF%9B%E8%A1%8C%E7%8A%B6%E6%80%81%E4%BF%9D%E6%8C%81"><span class="nav-number">5.5.</span> <span class="nav-text">利用requests.session进行状态保持</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="天海"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">天海</p>
+  <div class="site-description" itemprop="description">路漫漫其修远兮，吾将上下而求索！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tianheihj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tianheihj" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianheiwy@163.com" title="E-Mail → mailto:tianheiwy@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.iissnan.com/" title="https:&#x2F;&#x2F;theme-next.iissnan.com&#x2F;" rel="noopener" target="_blank">next主题配置</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tianhei.top/2023/08/07/python%E7%88%AC%E8%99%AB/02requests%E6%A8%A1%E5%9D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="天海">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天海工作室">
+      <meta itemprop="description" content="路漫漫其修远兮，吾将上下而求索！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="requests模块 | 天海工作室">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          requests模块
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-08-07 11:52:13 / 修改时间：15:52:45" itemprop="dateCreated datePublished" datetime="2023-08-07T11:52:13+08:00">2023-08-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本阶段课程主要学习requests这个http模块，该模块主要用于发送请求获取响应，该模块有很多的替代模块，比如说urlib模块，但是在工作中用的最多的还是requests模块，requests的代码简洁易懂，相对于臃肿的urllib模块，使用requests编写的爬虫代码将会更少，而且实现某一功能将会简单。因此建议大家掌握该模块的使用</p>
+<span id="more"></span>
+
+
+
+<h2 id="requests模块介绍"><a href="#requests模块介绍" class="headerlink" title="requests模块介绍"></a>requests模块介绍</h2><p>requests文档</p>
+<p><a target="_blank" rel="noopener" href="https://requests.readthedocs.io/projects/cn/zh_CN/latest/">https://requests.readthedocs.io/projects/cn/zh_CN/latest/</a></p>
+<h3 id="requests模块的作用"><a href="#requests模块的作用" class="headerlink" title="requests模块的作用"></a>requests模块的作用</h3><p>发送http请求，获取响应数据</p>
+<h3 id="requests安装"><a href="#requests安装" class="headerlink" title="requests安装"></a>requests安装</h3><p>requests模块是一个第三方模块，需要在你的python(虚拟)环境中额外安装</p>
+<ul>
+<li>pip&#x2F;pip3  install  requests</li>
+</ul>
+<h3 id="requests模块发送get请求"><a href="#requests模块发送get请求" class="headerlink" title="requests模块发送get请求"></a>requests模块发送get请求</h3><blockquote>
+<p>1.需求：通过requests向百度首页发送请求，获取该页面的源码</p>
+<p>2.运行下面的代码，观察打印输出的结果</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.2.1-简单的代码买现</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="comment">#目标ur1</span></span><br><span class="line">url = <span class="string">&#x27;https://www.baidu.com&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#向目标url发送get请求</span></span><br><span class="line">response = requests.get(url)</span><br><span class="line"></span><br><span class="line"><span class="comment">#打印响应内容</span></span><br><span class="line"><span class="built_in">print</span>(response.text)</span><br></pre></td></tr></table></figure>
+
+<h2 id="response响应对象"><a href="#response响应对象" class="headerlink" title="response响应对象"></a>response响应对象</h2><blockquote>
+<p>观察上边代码运行结果发现，有好多乱码；这是因为编解码使用的字符集不同造成的；</p>
+<p>我们尝试使用下边的办法来解决中文乱码问题</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="comment">#目标ur1</span></span><br><span class="line">url = <span class="string">&#x27;https://www.baidu.com&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#向目标url发送get请求</span></span><br><span class="line">response = requests.get(url)</span><br><span class="line"></span><br><span class="line"><span class="comment">#打印响应内容</span></span><br><span class="line"><span class="comment">#print(response.text)   </span></span><br><span class="line"><span class="built_in">print</span>(response.content.decode()) <span class="comment">#注意这里！</span></span><br></pre></td></tr></table></figure>
+
+<p>1.response.text是requests模块按照charset模块<font color=red>推测</font>出的编码字符集进行解码的结果</p>
+<p>2.网络传输的字符串都是bytes类型的，所以response.text &#x3D; response.content.decode(‘推测出的编码字符集’)</p>
+<p>3.我们可以在网页源码中搜索charset，尝试参考该编码字符集，注意存在不准确的情况</p>
+<p> <strong>response.text和response.content的区别：</strong></p>
+<ul>
+<li><p>response.text</p>
+<ul>
+<li>类型：str</li>
+<li>解码类型：requests模块自动根据HTTP头部对响应的编码作出有根据的推测，推测的文本编码</li>
+<li>如何修改编码方式：response.encoding &#x3D; ‘gbk’</li>
+</ul>
+</li>
+<li><p>response.content</p>
+<ul>
+<li>类型：bytes</li>
+<li>解码类型：没有指定</li>
+<li>如何修改编码方式：response.content.deocde(“utf8”)</li>
+</ul>
+<p>更推荐使用response.content.deocde()的方式获取响应的html页面</p>
+</li>
+</ul>
+<p><strong>利用response保存图片到本地</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment">#发送请求</span></span><br><span class="line">response = requests.get(<span class="string">&quot;https://www.baidu.com/img/bd_logo1.png&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(response.content)</span><br><span class="line"><span class="comment">#保存</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;a.png&quot;</span>,<span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(response.content)</span><br></pre></td></tr></table></figure>
+
+<p> <strong>通过对response.content进行decode来解决中文乱码</strong></p>
+<ul>
+<li>response.content.decode()    # 默认编码utf-8</li>
+<li>response.content.decode(“GBK”)</li>
+<li>常见的编码字符集<ul>
+<li>utf-8</li>
+<li>gbk</li>
+<li>gb2312</li>
+<li>ascii(读音：阿斯克码)</li>
+<li>iso-8859-1</li>
+</ul>
+</li>
+</ul>
+<p> <strong>response响应对象的其它常用属性或方法</strong></p>
+<blockquote>
+<p>response &#x3D; requests.get(url)中response是发送请求获取的响应对象；responsel响应对象中除了text、content获取响应内容以外还有其它常用的属性或方法：</p>
+</blockquote>
+<ul>
+<li>response.<strong>url</strong>  响应的url；有时候响应的url和请求的url并不一致</li>
+<li>response.<strong>status_code</strong>  响应状态码</li>
+<li>response.<strong>request.headers</strong>  响应对象的请求头</li>
+<li>response.<strong>headers</strong>  响应头</li>
+<li>response.<strong>cookies</strong>  响应的cookie（经过了set-cookie动作）；返回cookieJar类型</li>
+<li>response.<strong>json</strong>( )  自动将json字符串类型的响应内容转换为python对象(dict or list)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="comment">#目标ur1</span></span><br><span class="line">url = <span class="string">&#x27;https://www.baidu.com&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#向目标url发送get请求</span></span><br><span class="line">response = requests.get(url)</span><br><span class="line"></span><br><span class="line"><span class="comment">#打印响应内容</span></span><br><span class="line"><span class="comment">#print(response.text)</span></span><br><span class="line"><span class="comment">#print(response.content.decode())    #注意这里！</span></span><br><span class="line"><span class="built_in">print</span>(response.url)                  <span class="comment">#打印响应的ur1</span></span><br><span class="line"><span class="built_in">print</span>(response.status_code)          <span class="comment">#打印响应的状态码</span></span><br><span class="line"><span class="built_in">print</span>(response.request.headers)      <span class="comment">#打印响应对象的请求头</span></span><br><span class="line"><span class="built_in">print</span>(response.headers)              <span class="comment">#打印响应头</span></span><br><span class="line"><span class="built_in">print</span>(response.cookies)              <span class="comment">#打印响应中携带的cookies</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="requests模块发送get请求-1"><a href="#requests模块发送get请求-1" class="headerlink" title="requests模块发送get请求"></a>requests模块发送get请求</h2><h3 id="发送带headers的请求"><a href="#发送带headers的请求" class="headerlink" title="发送带headers的请求"></a>发送带headers的请求</h3><blockquote>
+<p>我们先写一个获取百度首页的代码</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;https://www.baidu.com&#x27;</span></span><br><span class="line"></span><br><span class="line">response = requests.get(url)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(response.content.decode())</span><br><span class="line"></span><br><span class="line"><span class="comment">#打印响应对应请求的请求头信息</span></span><br><span class="line"><span class="built_in">print</span>(response.request.headers)</span><br></pre></td></tr></table></figure>
+
+<p> <strong>思考</strong></p>
+<p>1.对比浏览器上百度首页的网页源码和代码中的百度首页的源码，有什么不同？</p>
+<ul>
+<li>查看网页源码的方法：<ul>
+<li>右键查看网页源代码或</li>
+<li>右键检查</li>
+</ul>
+</li>
+</ul>
+<p>2.对比对应url的响应内容和代码中的百度首页的源码，有什么不同？</p>
+<ul>
+<li>查看对应url的响应内容的方法：<br>i.  右键-检查<br>ii. 点击Net work<br>ⅲ. 勾选 Preserve log<br>iv. 刷新页面<br>v. 查看Name一栏下和浏览器地址栏相同的url的Response</li>
+</ul>
+<p>3.代码中的百度首页的源码非常少，为什么？</p>
+<ul>
+<li>需要我们带上请求头信息</li>
+</ul>
+<blockquote>
+<p>回顾爬虫的概念，模拟浏览器，欺骗服务器，获取和浏览器一致的内容</p>
+</blockquote>
+<ul>
+<li>请求头中有很多字段，其中User-Agent:字段必不可少，表示客户端的操作系统以及浏览器的信息</li>
+</ul>
+<p> <strong>携带请求头发送请求的方法</strong></p>
+<p>requests.get(url，headers&#x3D;headers)</p>
+<ul>
+<li>headers参接收字典形式的请求头</li>
+<li>请求头字段名作为key，字段对应的值作为value</li>
+</ul>
+<p> <strong>完成代码实现</strong></p>
+<blockquote>
+<p>从浏览器中复制User-Agent，构造headers字典；完成下面的代码后，运行代码查看结果</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url  =<span class="string">&#x27;https://www.baidu.com&#x27;</span></span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#在请求头中带上User-Agent,模拟浏览器发送请求</span></span><br><span class="line">response = requests.get(url,headers=headers)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(response.content)</span><br><span class="line"></span><br><span class="line"><span class="comment">#打印请求头信息</span></span><br><span class="line"><span class="built_in">print</span>(response.request.headers)</span><br></pre></td></tr></table></figure>
+
+<h3 id="发送带参数的请求"><a href="#发送带参数的请求" class="headerlink" title="发送带参数的请求"></a>发送带参数的请求</h3><blockquote>
+<p>我们在使用百度搜索的时候经常发现url地址中会有一个？，那么该问号后边的就是请求参数，又叫做<br>查询字符串</p>
+</blockquote>
+<p><strong>在url携带参数</strong></p>
+<p>直接对含有参数的ul发起请求</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;https://www.baidu.com/s?wd=python&#x27;</span></span><br><span class="line">response = requests.get(url,headers=headers)</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过params携带参数字典</strong></p>
+<p>1.构建请求参数字典</p>
+<p>2.向接口发送请求的时候带上参数字典，参数字典设置给params</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这是目标ur1</span></span><br><span class="line"><span class="comment"># url = &#x27;https://www.baidu.com/s?wd=python&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 最后有没有问号结果都一样</span></span><br><span class="line">url = <span class="string">&#x27;https://www.baidu.com/s?&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 请求参数是一个字典即wd=python</span></span><br><span class="line">kw =&#123;<span class="string">&#x27;wd&#x27;</span>:<span class="string">&#x27;python&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 带上请求参数发起请求，获取响应</span></span><br><span class="line">response = requests.get(url,headers=headers,params=kw)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(response.content)</span><br></pre></td></tr></table></figure>
+
+<h3 id="在headers参数中携带cookie"><a href="#在headers参数中携带cookie" class="headerlink" title="在headers参数中携带cookie"></a>在headers参数中携带cookie</h3><blockquote>
+<p>网站经常利用请求头中的Cookie字段来做用户访问状态的保持，那么我们可以在headers参数中添加Cookie，模拟普通用户的请求。我们以网易邮箱登陆为例：</p>
+</blockquote>
+<p> <strong>网易邮箱登陆抓包分析</strong></p>
+<p>　　1.打开浏览器，右起-检查，点击Net work,勾选Preserve log</p>
+<p>　　2.访问网易邮箱的url地址<a target="_blank" rel="noopener" href="https://mail.163.com/">https://mail.163.com/</a></p>
+<p>　　3.输入账号密码点击登陆后抓包，确定url</p>
+<p>　　4.确定url之后，再确定发送该请求所需要的请求头信息中的User-Agent和Cookie</p>
+<p> <strong>完成代码</strong></p>
+<ul>
+<li>从浏览器中复制User-Agent和Cookie</li>
+<li>浏览器中的请求头字段和值与headers参数中必须一致</li>
+<li>headers请求参数字典中的Cookie键对应的值是字符串</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;https://mail.163.com/js6/main.jsp?sid=SBtfWUeOvsCwFQmXALOOzPAuBfMmMPEh&amp;df=mail163_letter&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#构造请求头字典</span></span><br><span class="line">headers = &#123;</span><br><span class="line">	<span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36&quot;</span>,</span><br><span class="line">	<span class="string">&quot;Cookie&quot;</span>:<span class="string">&#x27;复制的cookie字符串&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#请求头参数字典中携带cook1e字符串</span></span><br><span class="line">response = requests.get(url,headers=headers)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;mail163.html&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(response.content)</span><br></pre></td></tr></table></figure>
+
+<p> <strong>运行代码验证结果</strong></p>
+<blockquote>
+<p>打开保存的网页，能正确显示网易邮箱登录之后的页面</p>
+</blockquote>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807113135235.png" alt="image-20230807113135235"></p>
+<h3 id="cookies参数的使用"><a href="#cookies参数的使用" class="headerlink" title="cookies参数的使用"></a>cookies参数的使用</h3><blockquote>
+<p>上一小节我们在headers参数中携带cookie，也可以使用专门的cookies参数</p>
+</blockquote>
+<p>1.cookies参数的形式：字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookies=&#123;<span class="string">&quot;cookie的name&quot;</span>:<span class="string">&quot;cookie的value&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>该字典对应请求头中Cookie字符串，以分号、空格分割每一对字典键值对</li>
+<li>等号左边的是一个cookie的name,对应cookies字典的key</li>
+<li>等号右边对应cookies字典的value</li>
+</ul>
+<p>2.cookies参数的使用方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(url,cookies = cookies)</span><br></pre></td></tr></table></figure>
+
+<p>3.将cookie字符串转换为cookies参数所需的字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookies_dict = &#123;cookie.split(<span class="string">&#x27;-&#x27;</span>)[<span class="number">0</span>]:cookie.split(<span class="string">&#x27;-&#x27;</span>)[-<span class="number">1</span>]<span class="keyword">for</span> cookie <span class="keyword">in</span> cookies_str.split(<span class="string">&#x27;;&#x27;</span>)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.注意：<strong>cookie-一般是有过期时间的，一旦过期需要重新获取</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;https://mail.163.com/js6/main.jsp?sid=SBtfWUeOvsCwFQmXALOOzPAuBfMmMPEh&amp;df=mail163_letter&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#构造请求头字典</span></span><br><span class="line">headers = &#123;</span><br><span class="line">	<span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#构造cook1es字典</span></span><br><span class="line">cookies_str=<span class="string">&quot;从浏宽器中copy过来的cookies字符串&quot;</span></span><br><span class="line"></span><br><span class="line">cookies_dict = &#123;cookie.split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">0</span>]:cookie.split(<span class="string">&#x27;=&#x27;</span>)[-<span class="number">1</span>] <span class="keyword">for</span> cookie <span class="keyword">in</span> cookies_str.split(<span class="string">&#x27;; &#x27;</span>)&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#请求头参数字典中携带cook1e字符串</span></span><br><span class="line">response  = requests.get(url,headers=headers,cookies=cookies_dict)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;mail163.html&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(response.content)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="cookieJar对象转换为cookies字典的方法"><a href="#cookieJar对象转换为cookies字典的方法" class="headerlink" title="cookieJar对象转换为cookies字典的方法"></a>cookieJar对象转换为cookies字典的方法</h3><blockquote>
+<p>使用request获取的response对象，具有cookies属性。该属性值是一个cookieJar类型，包含了对方服务器设置在本地的cookie。我们如何将其转换为cookies字典呢？</p>
+</blockquote>
+<p>1.转换方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookies_dict = requests.utils.dict_from_cookiejar(response.cookies)</span><br></pre></td></tr></table></figure>
+
+<p>2.其中response.cookies返回的就是cookieJar类型的对象</p>
+<p>3.requests.utils.dict_from_cookiejar函数返回cookies字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://www.baidu.com&quot;</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">	<span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">response = requests.get(url,headers = headers)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(response.cookies))  <span class="comment"># &lt;class &#x27;requests.cookies.RequestsCookieJar&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line">cookies_dict = requests.utils.dict_from_cookiejar(response.cookies)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(cookies_dict))  <span class="comment"># &lt;class &#x27;dict&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="requests模块发送post请求"><a href="#requests模块发送post请求" class="headerlink" title="requests模块发送post请求"></a>requests模块发送post请求</h2><blockquote>
+<p>思考：哪些地方我们会用到POST请求？</p>
+<p>1.登录注册（在web工程师看来POST比GET更安全，url地址中不会暴露用户的账号密码等信息)</p>
+<p>2.需要传输大文本内容的时候(POST请求对数据长度没有要求)</p>
+<p>所以同样的，我们的爬虫也需要在这两个地方模拟浏览器发送post请求</p>
+</blockquote>
+<p>　　其实发送 POST 请求与 GET 方式很相似，只是参数的传递我们需要定义在 data 中即可：</p>
+<h3 id="requests-发送post请求的方法"><a href="#requests-发送post请求的方法" class="headerlink" title="requests.发送post请求的方法"></a>requests.发送post请求的方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = requests.post(url = url, data = data, json = <span class="literal">None</span>, headers = headers)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>data ：( 可选 ) 字典，元组列表，字节或类似文件的对象，以在 Request 的正文中发送</li>
+<li>json: ( 可选 )JSON 数据，发送到 Request 类的主体中。</li>
+<li><strong>requests模块发送post请求函数的其它参数和发送get请求的参数完全一致</strong></li>
+</ul>
+<h3 id="POST发送JSON数据"><a href="#POST发送JSON数据" class="headerlink" title="POST发送JSON数据"></a>POST发送JSON数据</h3><p>很多时候你想要发送的数据并非编码为表单形式的 , 发现特别在爬取很多java网址中出现这个问题。如果你传递一个 string而不是一个dict ，那么数据会被直接发布出去。我们可以使用json.dumps()是将 dict 转化成str格式 ; 此处除了可以自行对dict进行编码，你还可以使用json参数直接传递，然后它就会被自动编码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://httpbin.org/post&quot;</span></span><br><span class="line"></span><br><span class="line">payload = &#123;<span class="string">&quot;some&quot;</span>: <span class="string">&#x27;data&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line">req1 = requests.post(url, data=json.dumps(payload))</span><br><span class="line">req2 = requests.post(url, json=payload)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(req1.text)</span><br><span class="line"><span class="built_in">print</span>(req2.text)</span><br></pre></td></tr></table></figure>
+
+<p>可以发现，我们成功获得了返回结果，其中 form 部分就是提交的数据，这就证明 POST 请求 成功发送了。</p>
+<p>requests 模块发送请求有 data 、 json 、 params 三种携带参数的方法。</p>
+<p>params 在 get 请求中使用， data 、 json 在 post 请求中使用。</p>
+<p>data 可以接收的参数为：字典，字符串，字节，文件对象。</p>
+<ul>
+<li><p>使用 json 参数，不管报文是 str 类型，还是 dict 类型，如果不指定 headers 中 content-type 的类型，默认是：application&#x2F;json 。</p>
+</li>
+<li><p>使用 data 参数，报文是 dict 类型，如果不指定 headers 中 content-type 的类型，默认 application&#x2F;x-www-form-urlencoded ，相当于普通 form 表单提交的形式，会将表单内的数据转换成键值对，此时数据可以从 request.POST 里面获取，而 request.body 的内容则为 a&#x3D;1&amp;b&#x3D;2 的这种键值对形式。</p>
+</li>
+<li><p>使用 data 参数，报文是 str 类型，如果不指定 headers 中 content-type 的类型，默认 application&#x2F;json。</p>
+</li>
+</ul>
+<p>用 data 参数提交数据时， request.body 的内容则为 a&#x3D;1&amp;b&#x3D;2 的这种形式，</p>
+<p>用 json 参数提交数据时， request.body 的内容则为 ’”a”: 1, “b”: 2’ 的这种形式</p>
+<h3 id="POST-上传文件"><a href="#POST-上传文件" class="headerlink" title="** POST 上传文件**"></a>** POST 上传文件**</h3><p>如果我们要使用爬虫上传文件，可以使用 fifile 参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&#x27;http://httpbin.org/post&#x27;</span></span><br><span class="line">files = &#123;<span class="string">&#x27;file&#x27;</span>: <span class="built_in">open</span>(<span class="string">&#x27;test.xlsx&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)&#125;</span><br><span class="line">req = requests.post(url, files=files)</span><br><span class="line"><span class="built_in">print</span>(req.text)</span><br></pre></td></tr></table></figure>
+
+<p>如果有熟悉 WEB 开发的伙伴应该知道，如果你发送一个非常大的文件作为 multipart&#x2F;form data 请求，你可能希望将请求做成数据流。默认下 requests 不支持 , 你可以使用 requests-toolbelt 三方库。</p>
+<h3 id="使用-POST-请求抓取网页"><a href="#使用-POST-请求抓取网页" class="headerlink" title="使用 POST 请求抓取网页"></a><strong>使用 POST 请求抓取网页</strong></h3><p>下面面我们通过金山翻译的例子看看post请求如何使用：</p>
+<p><strong>思路分析</strong></p>
+<p>1.抓包确定请求的url地址:http:&#x2F;fy.iciba.com&#x2F;</p>
+<p>2.确定请求的参数</p>
+<p>3.确定返回数据的位置</p>
+<p>4.摸拟浏览器获取数据</p>
+<p><strong>抓包分析的结论</strong></p>
+<p>1.url地址：<a target="_blank" rel="noopener" href="http://ifanyi.iciba.com/index.php?c=trans">http://ifanyi.iciba.com/index.php?c=trans</a></p>
+<p>2.请求方法：POST</p>
+<p>3.请求所需参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&#x27;from&#x27;</span>:<span class="string">&#x27;auto&#x27;</span>,    <span class="comment">#表示被翻译的语言是自动识别</span></span><br><span class="line">    <span class="string">&#x27;to&#x27;</span>:<span class="string">&#x27;auto&#x27;</span>,      <span class="comment">#表示翻译后的语言是自动识别</span></span><br><span class="line">    <span class="string">&#x27;q&#x27;</span>:<span class="string">&#x27;人生苦短&#x27;</span>     <span class="comment">#要翻译的中文字符串</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.pc端User-Agent:</p>
+<p>Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;114.0.0.0 Safari&#x2F;537.36</p>
+<p><strong>代码实现</strong></p>
+<blockquote>
+<p>了解requests模块发送post请求的方法，以及分析过金山翻译之后，我们来完成代码</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">King</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,word</span>):</span><br><span class="line">        self.url = <span class="string">&quot;http://ifanyi.iciba.com/index.php?c=trans&quot;</span></span><br><span class="line">        self.headers =&#123;</span><br><span class="line">            <span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        self.data = &#123;</span><br><span class="line">            <span class="string">&quot;from&quot;</span>: <span class="string">&quot;auto&quot;</span>,</span><br><span class="line">            <span class="string">&quot;to&quot;</span>: <span class="string">&quot;auto&quot;</span>,</span><br><span class="line">            <span class="string">&quot;q&quot;</span>: word</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_data</span>(<span class="params">self</span>):</span><br><span class="line">        response = requests.post(self.url,data=self.data,headers=self.headers)</span><br><span class="line">        <span class="keyword">return</span> response.content</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse_data</span>(<span class="params">self,data</span>):</span><br><span class="line">        dict_data = json.loads(data)</span><br><span class="line">        <span class="comment"># print(dict_data)</span></span><br><span class="line">        <span class="built_in">print</span>(dict_data[<span class="string">&#x27;out&#x27;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        response = self.get_data()</span><br><span class="line">        self.parse_data(response)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    word = <span class="built_in">input</span>(<span class="string">&quot;请输入要翻译的单词：&quot;</span>)</span><br><span class="line">    king = King(word)</span><br><span class="line">    king.run()</span><br></pre></td></tr></table></figure>
+
+<h3 id="post-数据来源"><a href="#post-数据来源" class="headerlink" title="post 数据来源"></a>post 数据来源</h3><p>1.固定值  抓包比较容易，不变值</p>
+<p>2.输入值  抓包比较根据自身变化值</p>
+<p>3.预设值-静态文件  需要提前从静态html中</p>
+<p>4.预设值-发请求  需要对指定地址发送请求，获取数据</p>
+<p>5.在客户端生成的  分析js ，模拟生成数据</p>
+<h3 id="寻找登录的post地址"><a href="#寻找登录的post地址" class="headerlink" title="寻找登录的post地址"></a>寻找登录的post地址</h3><ul>
+<li>在form表单中寻找action对应的url地址<ul>
+<li>post的数据是input标签中name的值作为键，真正的用户名密码作为值的字典，post的url地址就是action对应的url地址</li>
+</ul>
+</li>
+<li>抓包，寻找登录的url地址<ul>
+<li>勾选perserve log按钮，防止页面跳转找不到url</li>
+<li>寻找post数据，确定参数<ul>
+<li>参数不会变，直接用，比如密码不是动态加密的时候</li>
+<li>参数会变<ul>
+<li>参数在当前的响应中</li>
+<li>通过js生成</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="定位想要的js"><a href="#定位想要的js" class="headerlink" title="定位想要的js"></a>定位想要的js</h3><ul>
+<li>选择会触发js时间的按钮，点击event listener,.找到js的位置</li>
+<li>通过chrome中的search all file来搜索url中关键字</li>
+<li>添加断点的方式来查看js的操作，通过python来进行同样的操作</li>
+</ul>
+<h2 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h2><h3 id="超时参数timeout的使用"><a href="#超时参数timeout的使用" class="headerlink" title="超时参数timeout的使用"></a>超时参数timeout的使用</h3><blockquote>
+<p>在平时网上冲浪的过程中，我们经常会遇到网络波动，这个时候，一个请求等了很久可能任然没有结果。</p>
+<p>在爬虫中，一个请求很久没有结果，就会让整个项目的效率变得非常低，这个时候我们就需要对请求进行强制要求，让他必须在特定的时间内返回结果，否则就报错。</p>
+</blockquote>
+<p>1.超时参数timeout的使用方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(url,timeout=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<p>2.timeout:&#x3D;3表示：发送请求后，3秒钟内返回响应，否则就抛出异常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;&quot;</span></span><br><span class="line">response = requests.get(url,timeout=<span class="number">3</span>)  <span class="comment">#设置超时时间</span></span><br></pre></td></tr></table></figure>
+
+<p>实际上，请求分为两个阶段：连接(connect)和读取(read)。</p>
+<p>上面设置的timeout是用作连接和读取的timeout的总和。</p>
+<p>如果要分别指定用作连接和读取的timeout,则可以传入一个元组：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r=requests.get(<span class="string">&#x27;https://www.httpbin.org/get&#x27;</span>,timeout=(<span class="number">5</span>,<span class="number">30</span>))</span><br></pre></td></tr></table></figure>
+
+<p>如果想永久等待，可以直接将timeout设置为None,或者不设置直接留空，因为默认取值是None。这样的话，如果服务器还在运行，只是响应特别慢，那就慢慢等吧，它永远不会返回超时错误的。其用法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r requests.get(<span class="string">&#x27;https://www.httpbin.org/get&#x27;</span>,timeout=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>或直接不加参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r =requests.get(<span class="string">&#x27;https://www.httpbin.org/get&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="了解代理以及proxy代理参数的使用"><a href="#了解代理以及proxy代理参数的使用" class="headerlink" title="了解代理以及proxy代理参数的使用"></a>了解代理以及proxy代理参数的使用</h3><ol>
+<li><strong>理解使用代理的过程</strong></li>
+</ol>
+<p>1.代理ip是一个ip，指向的是一个代理服务器</p>
+<p>2.代理服务器能够帮我们向目标服务器转发请求</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807113157244.png" alt="image-20230807113157244"></p>
+<ol start="2">
+<li><strong>正向代理和反向代理的区别</strong></li>
+</ol>
+<blockquote>
+<p>前边提到proxy参数指定的代理ip指向的是正向的代理服务器，那么相应的就有反向服务器；现在来了解一下正向代理服务器和反向代理服务器的区别</p>
+</blockquote>
+<p>1.从发送请求的一方的角度，来区分正向或反向代理</p>
+<p>2.为浏览器或客户端（发送请求的一方）转发请求的，叫做正向代理</p>
+<ul>
+<li>浏览器知道最终处理请求的服务器的真实p地址，例如VPN</li>
+</ul>
+<p>3.不为浏览器或客户端（发送请求的一方）转发请求、而是为最终处理请求的服务器转发请求的，叫做反<br>向代理</p>
+<ul>
+<li>浏览器不知道服务器的真实地址，例如nginx</li>
+</ul>
+<ol start="3">
+<li><strong>代理ip(代理服务器)的分类</strong></li>
+</ol>
+<p>1.根据代理ip的匿名程度，代理IP可以分为下面三类：</p>
+<ul>
+<li><p>透明代理Transparent Proxy):透明代理虽然可以直接“隐藏”你的IP地址，但是还是可以查到你是<br>谁。目标服务器接收到的请求头如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REMOTE_ADDR = Proxy IP</span><br><span class="line">HTTP_VIA = Proxy IP</span><br><span class="line">HTTP_X_FORWARDED_FOR = Your IP</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>匿名代理(Anonymous Proxy):使用匿名代理，别人只能知道你用了代理，无法知道你是谁。目标<br>服务器接收到的请求头如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REMOTE_ADDR = proxy IP	</span><br><span class="line">HTTP_VIA = proxy IP</span><br><span class="line">HTTP_X_FORWARDED_FOR = proxy IP</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>高匿代理(Elite proxy或High Anonymity Proxy):高匿代理让别人根本无法发现你是在用代理，所以<br>是最好的选择。<strong>毫无疑问使用高匿代理效果最好</strong>。目标服务器接收到的请求头如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REMOTE_ADDR = Proxy IP</span><br><span class="line">HTTP VIA = <span class="keyword">not</span> deternined</span><br><span class="line">HTTP X FORWARDED FOR = <span class="keyword">not</span> determined</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>2.根据网站所使用的协议不同，需要使用相应协议的代理服务。从代理服务请求使用的协议可以分为：</p>
+<ul>
+<li>http代理：目标url为http协议</li>
+<li>https代理：目标url为https协议</li>
+<li>socks隧道代理（例如socks5代理）等：<ul>
+<li>socks代理只是简单地传递数据包，不关心是何种应用协议(FTP、HTTP和HTTPS等)。</li>
+<li>socks代理上比http、https代理耗时少。</li>
+<li>socks代理可以转发http和https的请求</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li><strong>proxies代理参数的使用</strong></li>
+</ol>
+<blockquote>
+<p>为了让服务器以为不是同一个客户端在请求；为了防止领繁向一个域名发送请求被封，所以我们需要<br>使用代理ip；那么我们接下来要学习requests模块是如何使用代理ip的</p>
+</blockquote>
+<ul>
+<li><p>用法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = requests.get(url,proxies=proxies)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>proxies的形式：字典</p>
+</li>
+<li><p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">proxies =&#123; </span><br><span class="line">    <span class="string">&quot;http&quot;</span>:<span class="string">&quot;http://12.34.56.79:9527&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https&quot;</span>:<span class="string">&quot;https://12.34.56.79:9527&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意：<strong>如果proxies:字典中包含有多个键值对，发送请求时将按照url地址的协议来选择使用相应的代理ip</strong></p>
+</li>
+</ul>
+<h3 id="使用verify参数忽略CA证书"><a href="#使用verify参数忽略CA证书" class="headerlink" title="使用verify参数忽略CA证书"></a>使用verify参数忽略CA证书</h3><p>现在很多网站要求使用HTTPS协议，但是有些网站可能并没有设置好HTTPS证书，或者网站的HTTPS证书可能并不被CA机构认可，这时这些网站就可能出现SSL证书错误的提示。</p>
+<p>例如这个实例网站：https:&#x2F;ssr2.scrape.center&#x2F;,如果用Chrome浏览器打开它，则会提示“您的连接不是私密连接”这样的错误。</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807113210313.png" alt="image-20230807113210313"></p>
+<p><strong>运行代码查看代码中向不安全的链接发起请求的效果</strong></p>
+<blockquote>
+<p>如果想用requests库来请求这类网站，又会遇到什么问题呢？我们用代码试一下：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;https://ssr2.scrape.center/&quot;</span></span><br><span class="line">response  = requests.get(url) <span class="comment"># ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate (_ssl.c:1131)</span></span><br></pre></td></tr></table></figure>
+
+<p>运行上面的代码将会抛出包含ssl.SSLCertVerificationError字样的异常，原因是我们请求的url的证书是无效的。</p>
+<p><strong>解决方案</strong></p>
+<blockquote>
+<p>为了在代码中能够正常的请求，我们使用verify&#x3D;False参数，此时requests模块发送请求将不做CA证书的验证：verify参数能够忽略CA证书的认证</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;https://ssr2.scrape.center/&quot;</span></span><br><span class="line">response  = requests.get(url,verify=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(response.status_code)</span><br></pre></td></tr></table></figure>
+
+<p>这样就能打印出请求成功的状态码了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\ProgramData\anaconda3\envs\spider\lib\site-packages\urllib3\connectionpool.py:1043: InsecureRequestWarning: Unverified HTTPS request is being made to host &#x27;ssr2.scrape.center&#x27;. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings</span><br><span class="line">  warnings.warn(</span><br><span class="line">200</span><br></pre></td></tr></table></figure>
+
+<p>不过我们发现其中报了一个警告，它建议我们给它指定证书。</p>
+<h3 id="身份认证"><a href="#身份认证" class="headerlink" title="身份认证"></a>身份认证</h3><p>在访问启用了身份认证的网站时（例如<a target="_blank" rel="noopener" href="https://ssr3.scrape.center/%EF%BC%89%EF%BC%8C%E9%A6%96%E5%85%88%E4%BC%9A%E5%BC%B9%E5%87%BA%E4%B8%80%E4%B8%AA%E8%AE%A4%E8%AF%81%E7%AA%97%E5%8F%A3">https://ssr3.scrape.center/），首先会弹出一个认证窗口</a></p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807113220650.png" alt="image-20230807113220650"></p>
+<p>这个网站就是启用了基本身份认证，我们可以使用requests库自带的身份认证功能，通过auth参数即可设置，可以直接传一个元组，它会默认使用HTTPBasicAuth这个类来认证。实例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># from requests.auth import HTTPBasicAuth</span></span><br><span class="line"><span class="comment"># r =  requests.get(&#x27;https://ssr3.scrape.center/&#x27;,auth=HTTPBasicAuth(&#x27;admin&#x27;,&#x27;admin&#x27;))</span></span><br><span class="line">r =  requests.get(<span class="string">&#x27;https://ssr3.scrape.center/&#x27;</span>,auth=(<span class="string">&#x27;admin&#x27;</span>,<span class="string">&#x27;admin&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(r.status_code)</span><br></pre></td></tr></table></figure>
+
+<h3 id="利用requests-session进行状态保持"><a href="#利用requests-session进行状态保持" class="headerlink" title="利用requests.session进行状态保持"></a>利用requests.session进行状态保持</h3><blockquote>
+<p>requests模块中的Session类能够自动处理发送请求获取响应过程中产生的cookie，进而达到状态保持的目的。接下来我们就来学习它</p>
+</blockquote>
+<p>在requests中，如果直接利用get()或post()等方法的确可以做到模拟网页的请求，但是这实际上是相当于不同的会话，也就是说相当于你用了两个浏览器打开了不同的页面。</p>
+<p>设想这样一个场景，第一个请求利用post() 方法登录了某个网站，第二次想获取成功登录后的自己的个人信息， 你又用了一次get()方法去请求个人信息页面。实际上，这相当于打开了两个浏览器，这是两个完全不相关的会话，能成功获取个人信息吗？那当然不能。</p>
+<p>有小伙伴可能说了，我在两次请求时设置一样的cookies不就行了？可以，但这样做起来显 得很烦琐，我们有更简单的解决方法。</p>
+<p>其实解决这个问题的主要方法就是维持同一个会话，也就是相当于打开一个新的浏览器选项 卡而不是新开一个浏览器。但是我又不想每次设置cookies，那该怎么办呢？这时候就有了新的 利器一Session对象。</p>
+<p>利用它，我们可以方便地维护一个会话，而且不用担心 cookies 的问题，它 会帮我们自动处理好。</p>
+<p>requests模块中的Session类能够自动处理发送请求获取响应过程中产生的cookie，进而达到状态保持的目的。接下来我们就来学习它。</p>
+<p> <strong>cookie和session区别：</strong></p>
+<ul>
+<li>cookie数据存放在客户的浏览器上，session数据放在服务器上。</li>
+<li>cookie:不是很安全，别人可以分析存放在本地的cookie并进行cookie欺骗。</li>
+<li>session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能。</li>
+<li>单个cookie保存的数据不能超过4K,很多浏览器都限制一个站点最多保存20个cookie。</li>
+</ul>
+<p><strong>带上cookie、session的好处：</strong></p>
+<ul>
+<li>能够请求到<font color=red>登录之后</font>的页面</li>
+</ul>
+<p>带上cookie、session的弊端：</p>
+<ul>
+<li>一套cookie和session往往和一个用户对应</li>
+<li>请求太快，请求次数太多，容易被服务器识别为爬虫</li>
+</ul>
+<p>不需要cookie的时候尽量不去使用cookie，但是为了获取登录之后的页面，我们必须发送带有cookies的请求</p>
+<p> <strong>requests.session的作用以及应用场景</strong></p>
+<ul>
+<li>requests.session的作用<ul>
+<li>自动处理cookie，即下一次请求会带上前一次的cookie</li>
+</ul>
+</li>
+<li>requests.session的应用场景<ul>
+<li>自动处理连续的多次请求过程中产生的cookie</li>
+</ul>
+</li>
+</ul>
+<p> <strong>requests.session使用方法</strong></p>
+<blockquote>
+<p>session实例在请求了一个网站后，对方服务器设置在本地的cookie会保存在session中，下一次再使用session请求对方服务器的时候，会带上前一次的cookie</p>
+</blockquote>
+<p>requests提供了一个叫做session类，来实现客户端和服务端的会话保持</p>
+<p>使用方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 实例化一个session对象</span></span><br><span class="line">session=requests.session()  </span><br><span class="line"><span class="comment"># 让session发送get或post请求</span></span><br><span class="line">response = session.get(url,headers,...)</span><br><span class="line">response = session.post(url,data,...)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>session对象发送get或post请求的参数，与requests模块发送请求的参数完全一致</li>
+</ul>
+<p> <strong>使用Session维持github登录信息</strong></p>
+<blockquote>
+<p>使用requests.session来完成github登陆，并获取需要登陆后才能访问的页面</p>
+</blockquote>
+<p><strong>提示</strong></p>
+<p>1.对github登陆以及访问登陆后才能访问的页面的整个完成过程进行抓包</p>
+<p>2.确定登陆请求的url地址、请求方法和所需的请求参数</p>
+<ul>
+<li>部分请求参数在别的url对应的响应内容中，可以使用re模块获取</li>
+</ul>
+<p>3.确定登陆后才能访问的页面的的u地址和请求方法</p>
+<p>4.利用requests.session完成代码</p>
+<p> <strong>参考代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造请求头字典</span></span><br><span class="line">headers = &#123;</span><br><span class="line"><span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例化session对象</span></span><br><span class="line">session = requests.session()</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;https://github.com/login&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问登陆页获取登陆请求所需参数</span></span><br><span class="line">response = session.get(url, headers=headers)</span><br><span class="line">authenticity_token = re.search(<span class="string">&#x27;name=&quot;authenticity_token&quot; value=&quot;(.*?)&quot; /&gt;&#x27;</span>,response.text).group(<span class="number">1</span>) <span class="comment"># 使用正则获取登陆请求所需参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造登陆请求参数字典</span></span><br><span class="line">data = &#123;</span><br><span class="line"><span class="string">&#x27;commit&#x27;</span>: <span class="string">&#x27;Sign in&#x27;</span>, <span class="comment"># 固定值</span></span><br><span class="line"><span class="string">&#x27;utf8&#x27;</span>: <span class="string">&#x27; &#x27;</span>, <span class="comment"># 固定值</span></span><br><span class="line"><span class="string">&#x27;authenticity_token&#x27;</span>: authenticity_token, <span class="comment"># 该参数在登陆页的响应内容中</span></span><br><span class="line"><span class="string">&#x27;login&#x27;</span>:<span class="built_in">input</span>(<span class="string">&#x27;输入github账号：&#x27;</span>),</span><br><span class="line"><span class="string">&#x27;password&#x27;</span>:<span class="built_in">input</span>(<span class="string">&#x27;输入github密码：&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送登陆请求（无需关注本次请求的响应）</span></span><br><span class="line">session.post(<span class="string">&quot;https://github.com/session&quot;</span>, headers=headers, data=data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印需要登陆后才能访问的页面</span></span><br><span class="line">response = session.get(<span class="string">&quot;https://github.com/settings/profile&quot;</span>, headers=headers)</span><br><span class="line"><span class="built_in">print</span>(response.text)</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/mm_facetoface_collect_qrcode_1690448192277.png" alt="天海 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/1690448212406.jpg" alt="天海 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫　</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/07/python%E7%88%AC%E8%99%AB/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/" rel="prev" title="爬虫基础">
+                  <i class="fa fa-angle-left"></i> 爬虫基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/08/07/python%E7%88%AC%E8%99%AB/03%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96/" rel="next" title="数据提取">
+                  数据提取 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">天海</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tianhei.top","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本阶段课程主要学习一下关于爬虫的相关前置知识和一些理论性的知识，通过本阶段的课程我们能够知道什么是爬虫，都有那些分类，爬虫能干什么等，同时还会站在爬虫的角度复习一下http协议。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫基础">
+<meta property="og:url" content="http://tianhei.top/2023/08/07/python%E7%88%AC%E8%99%AB/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="天海工作室">
+<meta property="og:description" content="本阶段课程主要学习一下关于爬虫的相关前置知识和一些理论性的知识，通过本阶段的课程我们能够知道什么是爬虫，都有那些分类，爬虫能干什么等，同时还会站在爬虫的角度复习一下http协议。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112258560.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112315183.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112327642.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112413072.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112428047.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112439040.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112450569.png">
+<meta property="article:published_time" content="2023-08-07T02:52:13.000Z">
+<meta property="article:modified_time" content="2023-08-07T07:41:08.114Z">
+<meta property="article:author" content="天海">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112258560.png">
+
+
+<link rel="canonical" href="http://tianhei.top/2023/08/07/python%E7%88%AC%E8%99%AB/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://tianhei.top/2023/08/07/python%E7%88%AC%E8%99%AB/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/","path":"2023/08/07/python爬虫/01爬虫基础/","title":"爬虫基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>爬虫基础 | 天海工作室</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">天海工作室</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">HTTP 基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL"><span class="nav-number">1.1.</span> <span class="nav-text">URL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E5%92%8CHTTPS"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP和HTTPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">HTTP请求过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82"><span class="nav-number">1.4.</span> <span class="nav-text">请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">爬虫的基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">爬虫的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E7%89%B9%E7%82%B9"><span class="nav-number">2.2.</span> <span class="nav-text">爬虫特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">爬虫的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">2.4.</span> <span class="nav-text">爬虫的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">2.5.</span> <span class="nav-text">爬虫的流程</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="天海"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">天海</p>
+  <div class="site-description" itemprop="description">路漫漫其修远兮，吾将上下而求索！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tianheihj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tianheihj" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianheiwy@163.com" title="E-Mail → mailto:tianheiwy@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.iissnan.com/" title="https:&#x2F;&#x2F;theme-next.iissnan.com&#x2F;" rel="noopener" target="_blank">next主题配置</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tianhei.top/2023/08/07/python%E7%88%AC%E8%99%AB/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="天海">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天海工作室">
+      <meta itemprop="description" content="路漫漫其修远兮，吾将上下而求索！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="爬虫基础 | 天海工作室">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          爬虫基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-08-07 10:52:13 / 修改时间：15:41:08" itemprop="dateCreated datePublished" datetime="2023-08-07T10:52:13+08:00">2023-08-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本阶段课程主要学习一下关于爬虫的相关前置知识和一些理论性的知识，通过本阶段的课程我们能够知道什么是爬虫，都有那些分类，爬虫能干什么等，同时还会站在爬虫的角度复习一下http协议。</p>
+<span id="more"></span>
+
+<h2 id="HTTP-基本原理"><a href="#HTTP-基本原理" class="headerlink" title="HTTP 基本原理"></a>HTTP 基本原理</h2><h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><p><strong>什么是URL？</strong></p>
+<p>URL:（Uniform Resource Locator,统一资源定位符），用于定位网络上的资源，每一个信息资源在网上都有唯一的一个地址，俗称网址。</p>
+<p> <strong>URL的组成？</strong></p>
+<p>URL遵守以下的语法规则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheme://host[:port][/path][?query-string=xxx][#anchor]</span><br></pre></td></tr></table></figure>
+
+<p>各个部分解释如下：</p>
+<ul>
+<li>scheme - 定义因特网服务的类型(访问因特网的协议)。常见的协议有 http、https、ftp、file。</li>
+<li>host - 主机名，域名（比如：<a target="_blank" rel="noopener" href="http://www.baidu.com)/">www.baidu.com）</a></li>
+<li>port - 定义主机上的端口号（http 的默认端口号是 80 ||| https 的默认端口号为443）</li>
+<li>path - 定义服务器上的路径（如果省略，则文档必须位于网站的根目录中）。比如：<a target="_blank" rel="noopener" href="https://blog.csdn.net/">https://blog.csdn.net</a><font color=red>&#x2F;weixin_42830697&#x2F;article&#x2F;details&#x2F;100055764</font>【标红部分为路径】</li>
+<li>query-string - 定义文档&#x2F;资源的名称。比如查找猫:<a target="_blank" rel="noopener" href="https://www.baidu.com/s?&wd=lol">https://www.baidu.com/s?&wd=</a>猫</li>
+<li>anchor-网页锚点，前端用来做网页定位。【不用管】</li>
+</ul>
+<p>解释：</p>
+<p><strong>常见的协议：</strong></p>
+<p>&lt;1&gt;<font color=red>HTTP</font>协议：超文本传输协议，是一种发布和接收HTML页面的协议。默认服务端口为80端口。也就是说，如果想利用互联网进行html页面的传输，必须遵从此协议。</p>
+<p>&lt;2&gt;<font color=red>HTTPS</font>协议：是HTTP协议的加密版本，在HTTP下加入了SSL层。默认服务端口为443端口。</p>
+<p>&lt;3&gt;<font color=red>FTP</font>协议：文件传输协议。</p>
+<p>&lt;4&gt;<font color=red>FILE</font>：本地文件传输协议。</p>
+<h3 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h3><blockquote>
+<p>HTTPS比HTTP更安全，但是性能更低</p>
+</blockquote>
+<ul>
+<li>HTTP:，默认瑞口号是<font color=red>80</font><br>。超文本：是指超过文本，不仅限于文本；还包括图片、音频、视频等文件<br>。传输协议：是指使用共用约定的固定格式来传递转换成字符串的超文本内容</li>
+<li>HTTPS：<font color=red>HTTP+SSL</font>(安全套接字层)，即带有安全套接字层的超本文传输协，默认端口号：<font color=red>443</font><ul>
+<li>SSL对传输的内容（超文本，也就是请求体或响应体）进行加密</li>
+</ul>
+</li>
+<li>可以打开浏览器访问一个url，右键检查，点击net work，点选一个url，查看http协议的形式</li>
+<li>关于http协议的其它参考阅读<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33301113/article/category/6943422/2">https://blog.csdn.net/qq_33301113/article/category/6943422/2</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.xuebuyuan.com/3252125.html">https://www.xuebuyuan.com/3252125.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/http/243074?fr=aladdin">https://baike.baidu.com/item/http/243074?fr=aladdin</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/cc1fea7810b2">https://www.jianshu.com/p/cc1fea7810b2</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30553235/article/details/79282113">https://blog.csdn.net/qq_30553235/article/details/79282113</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000002403462">https://segmentfault.com/q/1010000002403462</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="HTTP请求过程"><a href="#HTTP请求过程" class="headerlink" title="HTTP请求过程"></a>HTTP请求过程</h3><p>在回顾完http协议后，我们来了解一下浏览器发送http请求的过程</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112258560.png" alt="image-20230807112258560"></p>
+<p>1.浏览器在拿到域名对应的ip后，先向地址栏中的url发起请求，并获取响应</p>
+<p>2.在返回的响应内容(html)中，会带有css、js、图片等url地址，以及ajax代码，浏览器按照响应内容中的顺序依次发送其他的请求，并获取相应的响应</p>
+<p>3.浏览器每获取一个响应就对展示出的结果进行添加（加载），js，css等内容会修改页面的内容，js也可以重新发送请求，获取响应</p>
+<p>4.从获取第一个响应并在浏览器中展示，直到最终获取全部响应，并在展示的结果中添加内容或修改一一这个过程叫做浏览器的渲染</p>
+<p> <strong>注意：</strong></p>
+<p>但是在爬虫中，爬虫只会请求url地址，对应的拿到url地址对应的响应（该响应的内容可以是html，css，js，图片等)</p>
+<p>浏览器渲染出来的页面和爬虫请求的页面很多时候并<font color=red>不一样</font>，是因为爬虫不具备<font color=red>渲染</font>的能力（当然后续课程中我们会借助其它工具或包来帮助爬虫对响应内容进行渲染)</p>
+<ul>
+<li>浏览器最终展示的结果是由多个url地址分别发送的多次请求对应的多次响应共同渲染的结果</li>
+<li>所以在爬虫中，需要以发送请求的一个url地址对应的响应为准来进行数据的提取</li>
+</ul>
+<h3 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h3><p>请求，英文为Request，由客户端发往服务器，分为四部分内容：请求方法(Request Method）、请求的网址（RequestURL)、请求头(Request Headers）、请求体(RequestBody)。</p>
+<p>　　HTTP请求的形式</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112315183.png" alt="image-20230807112315183"></p>
+<p><strong>请求方法</strong></p>
+<p>网络请求主要有八种，如下表所示：</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112327642.png" alt="image-20230807112327642"></p>
+<p>最常用的是GET和POST请求。</p>
+<p>(1)<font color=red>GET</font>请求：一般情况下，发送请求从服务器上获取资源，不会对服务器资源产生任何影响的时候使用GET请求。</p>
+<p>(2)<font color=red>POST</font>请求：向服务器发送数据（登录）、上传文件等让服务器处理，会对服务器资源产生影响的时候使用POST请求。</p>
+<p>这两个请求是在网站开发中最常使用的两种请求。</p>
+<p><strong>请求的网址</strong></p>
+<p>请求的网址，它可以唯一确定客户端想请求的资源。</p>
+<p><strong>请求头</strong></p>
+<p>请求头，用来说明服务器要使用的附加信息，常用的请求头有如下几种：</p>
+<ul>
+<li><p>Content-Type</p>
+</li>
+<li><p>Host（主机和端口号）</p>
+</li>
+<li><p>Connection（链接类型）</p>
+</li>
+<li><p>Upgrade-Insecure-Requests（升级为HTTPS请求）</p>
+</li>
+<li><p>Accept(传输文件类型)</p>
+</li>
+<li><p>Accept-Encoding（文件编解码格式)</p>
+</li>
+<li><p>x-requested-with:XMLHttpRequest(是Ajax异步请求)</p>
+</li>
+<li><p><strong>User-Agent</strong></p>
+<p>　　指浏览器的名称。我们在向别人的服务器发送请求的时候，别人的服务器通过这个参数知道请求是从哪种浏览器发出的，这样就能返回正确的信息。但是如果不设置这个参数的话，我们如果使用<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Python&spm=1001.2101.3001.7020">Python</a>发送去了请求，别人的服务器【大部分服务器】就知道这个请求时Python发出的，从而不给我们返回正确的数据。因此我们必须设定这个参数。</p>
+</li>
+<li><p><strong>Referer</strong></p>
+<p>　　表明这个网页是从哪个网站跳转过来的。有些网页只能从特定的链接跳转过来，如果不设置这个参数，有些网页就知道你是通过非浏览器方式试图获取他们的html页面，因此就不返回给你正确的数据。所以这个参数可以用来进行反爬虫设计，我们需要设定这个参数。</p>
+</li>
+<li><p><strong>Cookie</strong></p>
+<p>　　HTTP协议是无状态的。也就是同一个人在浏览器上发送了两次请求，服务器不知道这两个请求是否来自同一个人。因此这时候就用Cookie来做标识。一般登陆后才能访问的网页，这个时候就需要发送Cookie信息。</p>
+</li>
+</ul>
+<blockquote>
+<p>加粗的请求头为常用请求头，在服务器被用来进行爬虫识别的频率最高，相较于其余的请求头更为重要，但是这里需要注意的是并不意味这其余的不重要，因为有的网站的运维或者开发人员可能剑走偏锋，会使用一些比较不常见的请求头来进行爬虫的甄别</p>
+</blockquote>
+<p><strong>请求体</strong></p>
+<p>请求体，一般承载的是POST请求中的<font color=red>表单数据</font>，对于GET请求，请求体为空。</p>
+<p>Content-Type和POST提交数据方式的关系</p>
+<table>
+<thead>
+<tr>
+<th align="left">Content-Type</th>
+<th align="center">POST提交数据的方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">application&#x2F;x-www-form-urlencoded</td>
+<td align="center">表单数据</td>
+</tr>
+<tr>
+<td align="left">multipart&#x2F;form-data</td>
+<td align="center">表单文件上传</td>
+</tr>
+<tr>
+<td align="left">application&#x2F;json</td>
+<td align="center">序列化JSON数据</td>
+</tr>
+<tr>
+<td align="left">text&#x2F;xml</td>
+<td align="center">xml数据</td>
+</tr>
+</tbody></table>
+<p>在爬虫中，构造POST请求需要使用正确的Content-Type,并了解设置各种请求库的各个参数时使用的都是哪种Content-.Type,如若不然可能会导致POST提交后无法得到正常响应。</p>
+<p><strong>响应</strong></p>
+<p>响应，即Response,由服务器返回给客户端，可以分为三部分：响应状态码(Response Status Code）、响应头(Response Headers)和响应体(Response Body)。</p>
+<p><font color=red>响应状态码</font></p>
+<p>响应状态码，标识服务器的响应状态。</p>
+<ul>
+<li>200：成功</li>
+<li>301：永久重定向，资源（网页等）被永久转移到其它URL【<a target="_blank" rel="noopener" href="http://www.jingdong.com/">www.jingdong.com</a> —&gt;&gt;&gt;<a target="_blank" rel="noopener" href="http://www.jd.com】/">www.jd.com】</a></li>
+<li>302：跳转，新的url在响应的Location头中给出</li>
+<li>303：浏览器对于POST的响应进行重定向至新的url</li>
+<li>307：浏览器对于GET的响应重定向至新的url</li>
+<li>403：资源不可用；服务器理解客户的请求，但拒绝处理它（没有权限）</li>
+<li>404：找不到该页面</li>
+<li>500：服务器内部错误</li>
+<li>503:服务器由于维护或者负载过重未能应答，在响应中可能可能会携带Retry-After响应头；有可能是因为爬虫频繁访问url,使服务器忽视爬虫的请求，最终返回503响应状态码</li>
+</ul>
+<p>我们在学习web知识的时候就已经学过了状态码的相关知识，我们知道这是服务器给我的相关反馈，我们在学习的时候就被教育说应该将真实情况反馈给客户端，但是在爬虫中，可能该站点的开发人员或者运维人员为了阻止数据被爬虫轻易获取，可能在状态码上做手脚，也就是说返回的状态码并不一定就是真实情况，比如：服务器已经识别出你是爬虫，但是为了让你疏忽大意，所以照祥返回状态码200，但是响应体中并没有数据。</p>
+<p>所有的状态码都不可信，一切以是否从抓包得到的响应中获取到数据为准</p>
+<p><font color=red>响应头</font></p>
+<p>响应头，包含了服务器对请求的应答信息。</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112413072.png" alt="image-20230807112413072"></p>
+<ul>
+<li>Date:用于标识响应产生的时间。</li>
+<li>Last-Modified:用于指定资源的最后修改时间。</li>
+<li>Content–Encoding:用于指定响应内容的编码。</li>
+<li>Server:包含服务器的信息，例如名称、版本号等。</li>
+<li>Content-Type:文档类型，指定返回的数据是什么类型，如text&#x2F;html代表返回HTML文档，application&#x2F;x-javascript代表返回JavaScript文件，image&#x2F;jpeg代表返回图片。</li>
+<li><strong>Set-Cookie</strong>:设置Cookie。.响应头中的Set-Cookie用于告诉浏览器需要将此内容放在Cookie中，下次请求时将Cookie携带上。</li>
+<li>Expires:用于指定响应的过期时间，可以让代理服务器或浏览器将加载的内容更新到缓存中。当再次访问相同的内容时，就可以直接从缓存中加载，达到降低服务器负载、缩短加载时间的目的。</li>
+</ul>
+<p><font color=red>响应体</font></p>
+<p>响应体，这可以说是最关键的部分了，响应的正文数据都存在于响应体中，例如请求网页时，响应体就是网页的HTML代码；请求一张图片时，响应体就是图片的二进制数据。我们做爬虫请求网页时，要解析的内容就是响应体。</p>
+<h2 id="爬虫的基本原理"><a href="#爬虫的基本原理" class="headerlink" title="爬虫的基本原理"></a>爬虫的基本原理</h2><h3 id="爬虫的概念"><a href="#爬虫的概念" class="headerlink" title="爬虫的概念"></a>爬虫的概念</h3><blockquote>
+<p>模拟浏览器，发送请求，获取响应</p>
+</blockquote>
+<p>网络爬虫（又被称为网页蜘蛛，网络机器人）就是模拟客户端（主要指浏览器）发送<font color=red>网络请求</font>，接收<font color=red>请求响应</font>，一种按照一定的规则，自动地抓取互联网信息的程序。</p>
+<ul>
+<li>原则上，只要是客户端（浏览器）能做的事情，爬虫都能够做</li>
+<li>爬虫也只能获取客户端（浏览器）所展示出来的数据</li>
+</ul>
+<p>网页由html源码构成，并且html源码包含了网页页面的所有内容。爬虫就是在html页面上按照一定规则取出我们想要的数据。</p>
+<h3 id="爬虫特点"><a href="#爬虫特点" class="headerlink" title="爬虫特点"></a>爬虫特点</h3><p>1.知识点碎片化</p>
+<p>爬虫方向的知识点都是十分碎片化的，因为我们在写爬虫的时候会面对各种各样的网站，每个网站实现的技术都有相似，但是大多数时候还是有区别的，这也就要求我们根据不同的网站使用不通的应对手段，爬虫并不像我们在学习web阶段的时侯要实现某一功能只需要按照套路就能够做出来，本阶段课程主要就是交给大家常用的一些网站爬取技术。</p>
+<p>2.学习难度</p>
+<p>爬虫的入门相对而言还是要比web简单，但是在后期，爬虫的难度要比web难，难在哪呢？在于爬虫工程师与网站的开发与运维人员的对抗，可能你写了一个网站的爬虫，结果该网站的运维人员发现之后添加了反爬措施，那么作为爬虫工程师就需要解决这个反爬。</p>
+<p>3.学习特点</p>
+<p>本阶段的课程并不像web阶段有一个完整的web项目进行学习，因为爬虫的特点，也就导致了我们的爬虫阶段课程是以某网站爬虫为讲解对象的，也就是一个技术点一个案例。</p>
+<p>4.后续发展</p>
+<p>相对于web主要掌握框架的使用，然后就是熟悉业务的单一方向，爬虫需要学生掌握的东西要更多，同学们在工作过程中可能根据工作需要涉及到更多从没有接触过的知识。</p>
+<p>5.法律层面</p>
+<p>目前而言，爬虫相关工作属于灰色地带，主要是目前国内现行法律对于爬虫的相关评判还没有一个明确的制度。</p>
+<p>6.建议</p>
+<p>好记性不如烂笔头，建议大家多找一些网站进行爬取练习。</p>
+<h3 id="爬虫的作用"><a href="#爬虫的作用" class="headerlink" title="爬虫的作用"></a>爬虫的作用</h3><p><strong>1.数据采集</strong></p>
+<ul>
+<li>抓取微博评论（机器学习舆情监控）</li>
+<li>抓取招聘网站的招聘信息（数据分析、挖据）</li>
+<li>新浪滚动新闻</li>
+<li>百度新闻网站</li>
+</ul>
+<p><strong>2.软件测试</strong></p>
+<ul>
+<li>爬虫之自动化测试</li>
+<li>虫师</li>
+</ul>
+<p><strong>3.12306抢票</strong></p>
+<p><strong>4.网站上的投票</strong></p>
+<ul>
+<li>投票网</li>
+</ul>
+<p><strong>5.网络安全</strong></p>
+<ul>
+<li>短信轰炸<ul>
+<li>注册页面</li>
+</ul>
+</li>
+<li>web漏洞扫描</li>
+</ul>
+<h3 id="爬虫的分类"><a href="#爬虫的分类" class="headerlink" title="爬虫的分类"></a>爬虫的分类</h3><p>根据被爬取网站的数量不同，可以分为：</p>
+<ul>
+<li>通用爬虫，通常指搜索引擎的爬虫</li>
+<li>聚焦爬虫，针对特定网站的爬虫，如12306抢票，或专门抓取某一个（某一类）网站数据</li>
+</ul>
+<p>　　通用爬虫和聚焦爬虫工作流程</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112428047.png" alt="image-20230807112428047"></p>
+<p>根据是否以获取数据为目的，可以分为：</p>
+<ul>
+<li>功能性爬虫，给你喜欢的明星投票、点赞</li>
+<li>数据增量爬虫，比如招聘信息</li>
+</ul>
+<p>根据url地址和对应的页面内容是否改变，数据增量爬虫可以分为：</p>
+<p> 基于u地址变化、内容也随之变化的数据增量爬虫</p>
+<ul>
+<li>url地址不变、内容变化的数据增量爬虫</li>
+</ul>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112439040.png" alt="image-20230807112439040"></p>
+<h3 id="爬虫的流程"><a href="#爬虫的流程" class="headerlink" title="爬虫的流程"></a>爬虫的流程</h3><blockquote>
+<p>爬虫的基本流程如图所示</p>
+</blockquote>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807112450569.png" alt="image-20230807112450569"></p>
+<p>1.获取一个url</p>
+<p>2.向url发送请求，并获取响应（需要http协议）</p>
+<p>3.如果从响应中提取url,则继续发送请求获取响应</p>
+<p>4.如果从响应中提取数据，则将数据进行保存</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/mm_facetoface_collect_qrcode_1690448192277.png" alt="天海 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/1690448212406.jpg" alt="天海 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/04/python%E7%88%AC%E8%99%AB/04selenium/" rel="prev" title="selenium">
+                  <i class="fa fa-angle-left"></i> selenium
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/08/07/python%E7%88%AC%E8%99%AB/02requests%E6%A8%A1%E5%9D%97/" rel="next" title="requests模块">
+                  requests模块 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">天海</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tianhei.top","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="hexo的初级搭建，并部署到github page上，以及个人域名的绑定。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo搭建个人博客">
+<meta property="og:url" content="http://tianhei.top/2023/07/21/hexo%E6%90%AD%E5%BB%BA/hexo%E7%9A%84%E5%88%9D%E7%BA%A7%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="天海工作室">
+<meta property="og:description" content="hexo的初级搭建，并部署到github page上，以及个人域名的绑定。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230721091903901.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230721091534149.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230721092158379.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807111215089.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230721144938545.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/951e65614a195996cff7519f7fafdec1.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230817090754287.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230817094620427.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230817091320406.png">
+<meta property="og:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230721153238639.png">
+<meta property="article:published_time" content="2023-07-21T06:52:13.000Z">
+<meta property="article:modified_time" content="2023-08-17T01:47:30.593Z">
+<meta property="article:author" content="天海">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230721091903901.png">
+
+
+<link rel="canonical" href="http://tianhei.top/2023/07/21/hexo%E6%90%AD%E5%BB%BA/hexo%E7%9A%84%E5%88%9D%E7%BA%A7%E6%90%AD%E5%BB%BA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://tianhei.top/2023/07/21/hexo%E6%90%AD%E5%BB%BA/hexo%E7%9A%84%E5%88%9D%E7%BA%A7%E6%90%AD%E5%BB%BA/","path":"2023/07/21/hexo搭建/hexo的初级搭建/","title":"Hexo搭建个人博客"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Hexo搭建个人博客 | 天海工作室</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">天海工作室</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Hexo简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85git"><span class="nav-number">2.</span> <span class="nav-text">1. 安装git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85-Node-js"><span class="nav-number">3.</span> <span class="nav-text">2. 安装 Node.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85-Hexo"><span class="nav-number">4.</span> <span class="nav-text">3. 安装 Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%8D%9A%E5%AE%A2"><span class="nav-number">4.1.</span> <span class="nav-text">启动博客</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-GitHub%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BB%93%E5%BA%93"><span class="nav-number">5.</span> <span class="nav-text">4. GitHub创建个人仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%94%9F%E6%88%90SSH%E6%B7%BB%E5%8A%A0%E5%88%B0GitHub"><span class="nav-number">6.</span> <span class="nav-text">5. 生成SSH添加到GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%B0%86hexo%E9%83%A8%E7%BD%B2%E5%88%B0GitHub"><span class="nav-number">7.</span> <span class="nav-text">6. 将hexo部署到GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E8%AE%BE%E7%BD%AE%E4%B8%AA%E4%BA%BA%E5%9F%9F%E5%90%8D"><span class="nav-number">8.</span> <span class="nav-text">7. 设置个人域名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86"><span class="nav-number"></span> <span class="nav-text">第二部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-hexo%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">1. hexo基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%AB%99"><span class="nav-number">1.1.</span> <span class="nav-text">网站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E5%9D%80"><span class="nav-number">1.2.</span> <span class="nav-text">网址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">2. 更换主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#menu%EF%BC%88%E8%8F%9C%E5%8D%95%E6%A0%8F%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">menu（菜单栏）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="天海"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">天海</p>
+  <div class="site-description" itemprop="description">路漫漫其修远兮，吾将上下而求索！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tianheihj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tianheihj" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianheiwy@163.com" title="E-Mail → mailto:tianheiwy@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.iissnan.com/" title="https:&#x2F;&#x2F;theme-next.iissnan.com&#x2F;" rel="noopener" target="_blank">next主题配置</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tianhei.top/2023/07/21/hexo%E6%90%AD%E5%BB%BA/hexo%E7%9A%84%E5%88%9D%E7%BA%A7%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="天海">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天海工作室">
+      <meta itemprop="description" content="路漫漫其修远兮，吾将上下而求索！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Hexo搭建个人博客 | 天海工作室">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo搭建个人博客
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-07-21 14:52:13" itemprop="dateCreated datePublished" datetime="2023-07-21T14:52:13+08:00">2023-07-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-08-17 09:47:30" itemprop="dateModified" datetime="2023-08-17T09:47:30+08:00">2023-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>hexo的初级搭建，并部署到github page上，以及个人域名的绑定。</p>
+<span id="more"></span>
+<h2 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a>Hexo简介</h2><p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">hexo官网</a>进行详细查看，因为Hexo的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。</p>
+<blockquote>
+<p> <strong>Hexo搭建步骤</strong></p>
+<ol>
+<li>安装Git</li>
+<li>安装Node.js</li>
+<li>安装Hexo</li>
+<li>GitHub创建个人仓库</li>
+<li>生成SSH添加到GitHub</li>
+<li>将hexo部署到GitHub</li>
+<li>设置个人域名</li>
+<li>发布文章</li>
+</ol>
+</blockquote>
+<h2 id="1-安装git"><a href="#1-安装git" class="headerlink" title="1. 安装git"></a>1. 安装git</h2><p>Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，我觉得建议每个人都去了解一下。廖雪峰老师的Git教程写的非常好，大家可以了解一下。<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git教程</a></p>
+<p><strong>下载git</strong></p>
+<p>windows：到git官网上下载<a target="_blank" rel="noopener" href="https://gitforwindows.org/">https://gitforwindows.org/</a></p>
+<p>官网慢，可以用国内的镜像：<a target="_blank" rel="noopener" href="https://npm.taobao.org/mirrors/git-for-windows/%E3%80%82">https://npm.taobao.org/mirrors/git-for-windows/。</a></p>
+<p><strong>安装git</strong></p>
+<p>直接点击install，然后一直next</p>
+<p>安装好后，查看一下版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-安装-Node-js"><a href="#2-安装-Node-js" class="headerlink" title="2. 安装 Node.js"></a>2. 安装 Node.js</h2><p>Hexo是基于nodeJS编写的，所以需要安装一下nodeJs和里面的npm工具。</p>
+<p>Node.js 为大多数平台提供了官方的 <a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download/">安装程序</a>。对于中国大陆地区用户，可以前往 <a target="_blank" rel="noopener" href="https://npmmirror.com/mirrors/node/">淘宝 Node.js 镜像</a> 下载。</p>
+<p>安装完成后打开cmd查看版本号验证是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\tianhei&gt;node -v</span><br><span class="line">v18.17.0</span><br></pre></td></tr></table></figure>
+
+<p>Node.js中自带了npm包管理器，在cmd中查看npm版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\tianhei&gt;npm -v</span><br><span class="line">9.6.7</span><br></pre></td></tr></table></figure>
+
+<p>windows在git安装完后，就可以直接使用git bash来敲命令行了，不用自带的cmd，cmd有点难用。</p>
+<h2 id="3-安装-Hexo"><a href="#3-安装-Hexo" class="headerlink" title="3. 安装 Hexo"></a>3. 安装 Hexo</h2><p>前面git和nodejs安装好后，就可以安装hexo了，你可以先创建一个文件夹Hexo，然后<code>cd</code>到这个文件夹下（或者在这个文件夹下直接右键git bash打开）。</p>
+<p>输入命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>-g：全局安装</p>
+<p>再查看hexo版本（检测是否安装成功）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo -v</span><br></pre></td></tr></table></figure>
+
+<p>至此就全部安装完了。</p>
+<p>接下来初始化一下hexo，对myblog初始化，因为从github上下载，所以有点慢，为了解决就把npm设置为淘宝镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<p>检查是否修改成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config get registry</span><br></pre></td></tr></table></figure>
+
+<p>页面结果;<a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a></p>
+<p>如果结果是淘宝镜像网址，就可以执行init了，在Hexo中再新建一个空文件夹myblog作为hexo项目（博客）目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init myblog</span><br></pre></td></tr></table></figure>
+
+<p>这个myblog可以自己取什么名字都行，然后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> myblog  //进入这个myblog文件夹</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<p>新建完成后，指定文件夹的目录如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">├── .github</span><br><span class="line">├── node_modules</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source\_posts</span><br><span class="line">|   └── hello-world.mf</span><br><span class="line">├── themes</span><br><span class="line">├── _config.landscape.yml</span><br><span class="line">├── _config.yml</span><br><span class="line">├── .gitignore</span><br><span class="line">├── db.json</span><br><span class="line">├── package-lock.json</span><br><span class="line">└── package.json</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>node_modules: 依赖包</li>
+<li>public：存放生成的页面</li>
+<li>scaffolds：生成文章的一些模板,Hexo 的模板是指在新建的文章文件中默认填充的内容。例如，如果您修改 <code>scaffold/post.md</code> 中的 Front-matter 内容，那么每次新建一篇文章时都会包含这个修改。</li>
+<li>source：资源文件夹是存放用户资源的地方。除 <code>_posts</code> 文件夹之外，开头命名为 <code>_</code> (下划线)的文件 &#x2F; 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 <code>public</code> 文件夹，而其他文件会被拷贝过去。</li>
+<li>themes：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/themes">主题</a> 文件夹。Hexo 会根据主题来生成静态页面。</li>
+<li>** _config.yml: 博客的配置文件**</li>
+<li>package.json:应用程序的信息。<a target="_blank" rel="noopener" href="https://ejs.co/">EJS</a>, <a target="_blank" rel="noopener" href="http://learnboost.github.io/stylus/">Stylus</a> 和 <a target="_blank" rel="noopener" href="http://daringfireball.net/projects/markdown/">Markdown</a> 渲染引擎 已默认安装，您可以自由移除。</li>
+</ul>
+<h3 id="启动博客"><a href="#启动博客" class="headerlink" title="启动博客"></a>启动博客</h3><p>在myblog文件夹下启动hexo服务，这里还是在git面板里操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g //生成静态网站</span><br><span class="line">$ hexo server</span><br><span class="line">或者 </span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
+
+<p>打开hexo的服务，在浏览器输入localhost:4000就可以看到你生成的博客了。</p>
+<h2 id="4-GitHub创建个人仓库"><a href="#4-GitHub创建个人仓库" class="headerlink" title="4. GitHub创建个人仓库"></a>4. GitHub创建个人仓库</h2><p>首先，你先要有一个GitHub账户，去注册一个吧。</p>
+<p>注册完登录后，在GitHub.com中看到一个New repository，新建仓库</p>
+<p>创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到GitHub page的时候，才会被识别，也就是xxxx.github.io，其中xxx就是你注册GitHub的用户名。</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230721091903901.png" alt="image-20230721091903901"></p>
+<p>点击create repository。</p>
+<h2 id="5-生成SSH添加到GitHub"><a href="#5-生成SSH添加到GitHub" class="headerlink" title="5. 生成SSH添加到GitHub"></a>5. 生成SSH添加到GitHub</h2><p>回到你的git bash中，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;yourname&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;youremail&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的yourname输入你的GitHub用户名，youremail输入你GitHub的邮箱。这样GitHub才能知道你是不是对应它的账户。</p>
+<p>可以用以下两条，检查一下你有没有输对</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config user.name</span><br><span class="line">$ git config user.email</span><br></pre></td></tr></table></figure>
+
+<p>然后创建SSH,一路回车</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;youremail&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个时候它会告诉你已经生成了.ssh的文件夹。在你的电脑中找到这个文件夹。</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230721091534149.png" alt="image-20230721091534149"></p>
+<p>ssh，简单来讲，就是一个秘钥，其中，<code>id_rsa</code>是你这台电脑的私人秘钥，不能给别人看的，<code>id_rsa.pub</code>是公共秘钥，可以随便给别人看。把这个公钥放在GitHub上，这样当你链接GitHub自己的账户时，它就会根据公钥匹配你的私钥，当能够相互匹配时，才能够顺利的通过git上传你的文件到GitHub上。</p>
+<p>而后在GitHub的setting中，找到SSH keys的设置选项，点击<code>New SSH key</code>把你的<code>id_rsa.pub</code>里面的信息复制进去。</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230721092158379.png" alt="image-20230721092158379"></p>
+<p>在gitbash中，查看是否成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>成功显示：</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230807111215089.png" alt="image-20230807111215089"></p>
+<h2 id="6-将hexo部署到GitHub"><a href="#6-将hexo部署到GitHub" class="headerlink" title="6. 将hexo部署到GitHub"></a>6. 将hexo部署到GitHub</h2><p>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 <code>_config.yml</code>，翻到最后，修改为YourgithubName就是你的GitHub账户</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/YourgithubName/YourgithubName.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<p>这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>然后,清除了你之前生成的东西，也可以不加。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean //hexo cl</span><br></pre></td></tr></table></figure>
+
+<p>生成页面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate  // hexo g</span><br></pre></td></tr></table></figure>
+
+<p>本地文件上传到Github上面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy // hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意deploy时可能要你输入username和password。</p>
+<p>得到下图就说明部署成功了，过一会儿就可以在<code>http://yourname.github.io</code> 这个网站看到你的博客了！！</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230721144938545.png" alt="image-20230721144938545"></p>
+<h2 id="7-设置个人域名"><a href="#7-设置个人域名" class="headerlink" title="7. 设置个人域名"></a>7. 设置个人域名</h2><p>现在你的个人网站的地址是 <code>yourname.github.io</code>，如果觉得这个网址逼格不太够，这就需要你设置个人域名了。但是需要花钱。</p>
+<p>注册一个阿里云账户,在<a target="_blank" rel="noopener" href="https://wanwang.aliyun.com/?spm=5176.8142029.digitalization.2.e9396d3e46JCc5">阿里云</a>上买一个域名，我买的是 <code>fangzh.top</code>，各个后缀的价格不太一样，比如最广泛的.com就比较贵，看个人喜好咯。</p>
+<p>你需要先去进行实名认证,然后在域名控制台中，看到你购买的域名。</p>
+<p>点<strong>解析</strong>进去，添加解析。</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/951e65614a195996cff7519f7fafdec1.png" alt="img"></p>
+<p>其中，192.30.252.153 和 192.30.252.154 是GitHub的服务器地址。</p>
+<p><strong>注意，解析线路选择默认</strong>！</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230817090754287.png" alt="image-20230817090754287"></p>
+<p>登录GitHub，进入之前创建的仓库，点击settings，在Page页面设置Custom domain，输入你的域名<code>tianheihj.top</code></p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230817094620427.png" alt="image-20230817094620427"></p>
+<p>然后在你的博客文件source中创建一个名为CNAME文件，不要后缀。写上你的域名。</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230817091320406.png" alt="image-20230817091320406"></p>
+<p>最后，在gitbash中，输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>过不了多久，再打开你的浏览器，输入你自己的域名，就可以看到搭建的网站啦！</p>
+<h1 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a>第二部分</h1><p>hexo的基本配置，更换主题，实现多终端工作，以及在coding page部署实现国内外分流。</p>
+<h2 id="1-hexo基本配置"><a href="#1-hexo基本配置" class="headerlink" title="1. hexo基本配置"></a>1. hexo基本配置</h2><p>在文件根目录下的<code>_config.yml</code>，就是整个hexo框架的配置文件了。可以在里面修改大部分的配置。详细可参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">官方的配置</a>描述。</p>
+<h3 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>title</code></td>
+<td>网站标题</td>
+</tr>
+<tr>
+<td><code>subtitle</code></td>
+<td>网站副标题</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>网站描述</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>您的名字</td>
+</tr>
+<tr>
+<td><code>language</code></td>
+<td>网站使用的语言</td>
+</tr>
+<tr>
+<td><code>timezone</code></td>
+<td>网站时区。Hexo 默认使用您电脑的时区。<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">时区列表</a>。比如说：<code>America/New_York</code>, <code>Japan</code>, 和 <code>UTC</code> 。</td>
+</tr>
+</tbody></table>
+<p>其中，<code>description</code>主要用于SEO，告诉搜索引擎一个关于您站点的简单描述，通常建议在其中包含您网站的关键词。<code>author</code>参数用于主题显示文章的作者。</p>
+<h3 id="网址"><a href="#网址" class="headerlink" title="网址"></a>网址</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>url</code></td>
+<td>网址</td>
+</tr>
+<tr>
+<td><code>root</code></td>
+<td>网站根目录</td>
+</tr>
+<tr>
+<td><code>permalink</code></td>
+<td>文章的 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/permalinks">永久链接</a> 格式</td>
+</tr>
+<tr>
+<td><code>permalink_defaults</code></td>
+<td>永久链接中各部分的默认值</td>
+</tr>
+</tbody></table>
+<p>在这里，你需要把<code>url</code>改成你的网站域名。</p>
+<p>permalink，也就是你生成某个文章时的那个链接格式。</p>
+<p>比如我新建一个文章叫<code>temp.md</code>，那么这个时候他自动生成的地址就是<code>http://yoursite.com/2018/09/05/temp</code>。</p>
+<p>以下是官方给出的示例，关于链接的变量还有很多，需要的可以去官网上查找 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/permalinks">永久链接</a> 。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:year/:month/:day/:title/</code></td>
+<td>2013&#x2F;07&#x2F;14&#x2F;hello-world</td>
+</tr>
+<tr>
+<td><code>:year-:month-:day-:title.html</code></td>
+<td>2013-07-14-hello-world.html</td>
+</tr>
+<tr>
+<td><code>:category/:title</code></td>
+<td>foo&#x2F;bar&#x2F;hello-world</td>
+</tr>
+</tbody></table>
+<p>再往下翻，中间这些都默认就好了。</p>
+<p><code>theme</code>就是选择什么主题，也就是在<code>theme</code>这个文件夹下，在官网上有很多个主题，默认给你安装的是<code>lanscape</code>这个主题。当你需要更换主题时，在官网上下载，把主题的文件放在<code>theme</code>文件夹下，再修改这个参数就可以了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: jacman</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="2-更换主题"><a href="#2-更换主题" class="headerlink" title="2. 更换主题"></a>2. 更换主题</h2><p>到这一步，如果你觉得默认的<code>landscape</code>主题不好看，那么可以在官网的主题中，选择你喜欢的一个主题进行修改就可以啦。<a target="_blank" rel="noopener" href="https://hexo.io/themes/">点这里</a></p>
+<p>这里有200多个主题可以选。不过最受欢迎的就是那么几个，比如<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">NexT主题</a>，非常的简洁好看，大多数人都选择这个，关于这个的教程也比较多。不过我选择的是<a target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-hueman">hueman</a>这个主题</p>
+<p>直接在github链接上下载下来，然后放到<code>theme</code>文件夹下就行了，然后再在刚才说的配置文件中把<code>theme</code>换成那个主题文件夹的名字，它就会自动在<code>theme</code>文件夹中搜索你配置的主题。</p>
+<p>而后进入<code>hueman</code>这个文件夹，可以看到里面也有一个配置文件<code>_config.xml</code>，貌似它默认是<code>_config.xml.example</code>，把它复制一份，重命名为<code>_config.xml</code>就可以了。这个配置文件是修改你整个主题的配置文件。</p>
+<h3 id="menu（菜单栏）"><a href="#menu（菜单栏）" class="headerlink" title="menu（菜单栏）"></a>menu（菜单栏）</h3><p>也就是上面菜单栏上的这些东西。</p>
+<p><img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/image-20230721153238639.png" alt="image-20230721153238639"></p>
+<p>其中，About这个你是找不到网页的，因为你的文章中没有about这个东西。如果你想要的话，可以执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page about</span><br></pre></td></tr></table></figure>
+
+<p>它就会在根目录下<code>source</code>文件夹中新建了一个<code>about</code>文件夹，以及index.md，在index.md中写上你想要写的东西，就可以在网站上展示出来了。</p>
+<p>如果你想要自己再自定义一个菜单栏的选项，那么就</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page yourdiy</span><br></pre></td></tr></table></figure>
+
+<p>然后在主题配置文件的menu菜单栏添加一个 <code>Yourdiy : /yourdiy</code>，注意冒号后面要有空格，以及前面的空格要和menu中默认的保持整齐。然后在<code>languages</code>文件夹中，找到<code>zh-CN.yml</code>，在index中添加<code>yourdiy: &#39;中文意思&#39;</code>就可以显示中文了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/mm_facetoface_collect_qrcode_1690448192277.png" alt="天海 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://tianhei-alyun.oss-cn-beijing.aliyuncs.com/1690448212406.jpg" alt="天海 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/07/24/hexo%E6%90%AD%E5%BB%BA/Typora%E9%85%8D%E7%BD%AE%E9%98%BF%E9%87%8C%E4%BA%91%E5%9B%BE%E5%BA%8A%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/" rel="next" title="Typora配置阿里云图床">
+                  Typora配置阿里云图床 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">天海</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
